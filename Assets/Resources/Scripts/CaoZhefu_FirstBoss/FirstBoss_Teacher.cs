@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-enum TeacherState
+enum TeacherState//boss状态枚举
 {
     Move,Attack
 }
 
-enum AttackMode
+enum AttackMode//攻击模式枚举
 {
     CloseAttck,FarAttack
 }
@@ -226,7 +226,7 @@ public class FirstBoss_Teacher : MonoBehaviour {
         Rigidbody2D go = Instantiate(BookPrefab, transform.position, Quaternion.identity).GetComponent<Rigidbody2D>();
         //根据角度和力量将物体抛掷出去
         int xDir = PlayerTransfrom.position.x > transform.position.x?1:-1;
-        float rate=1f/Mathf.Tan(Mathf.PI * BookThrowAngle / 180f);
+        float rate=1f/Mathf.Tan(Mathf.PI * BookThrowAngle / 180f);//计算x向量和y向量比值
         Vector2 dir = new Vector2(xDir*rate, 1);
         go.AddForce(dir*BookThrowPower, ForceMode2D.Force);
     }
