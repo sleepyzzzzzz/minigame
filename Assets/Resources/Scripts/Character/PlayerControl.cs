@@ -6,7 +6,7 @@ public class PlayerControl : MonoBehaviour
 {
     public Rigidbody2D rig;
 
-    private float JumpForce;
+    private float JumpForce = 30f;
     public float speed = 30f;
     public float crouch_speed = 0.5f;
     public float current_speed = 0f;
