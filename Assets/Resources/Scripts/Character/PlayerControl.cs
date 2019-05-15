@@ -29,7 +29,7 @@ public class PlayerControl : MonoBehaviour
     private void FixedUpdate()
     {
         isGround = Physics2D.OverlapCircle(target_pos.position, checkr, whatisGround);
-        iif (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
             transform.Translate(Vector3.left * speed * Time.deltaTime);
         }
