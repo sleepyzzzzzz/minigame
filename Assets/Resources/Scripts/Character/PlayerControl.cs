@@ -29,15 +29,13 @@ public class PlayerControl : MonoBehaviour
     private void FixedUpdate()
     {
         isGround = Physics2D.OverlapCircle(target_pos.position, checkr, whatisGround);
-        horizontal = Input.GetAxis("Horizontal");
-        current_speed = horizontal * Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.A))
+        iif (Input.GetKey(KeyCode.A))
         {
-            player.AddForce(new Vector2(-horizontal * speed * Time.deltaTime, 0));
+            transform.Translate(Vector3.left * speed * Time.deltaTime);
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
-            player.AddForce(new Vector2(horizontal * speed * Time.deltaTime, 0));
+            transform.Translate(Vector3.right * speed * Time.deltaTime);
         }
         if (Input.GetKeyDown(KeyCode.W) && isGround)
         {
