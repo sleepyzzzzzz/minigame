@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    public Rigidbody2D rig;
+    public Rigidbody2D player;
 
     private float JumpForce = 30f;
     public float speed = 30f;
@@ -13,6 +13,7 @@ public class PlayerControl : MonoBehaviour
     public float horizontal = 0.0f;
     public bool jump = false;
     public bool crouch = false;
+    private Vector2 ini_state;
 
     private bool isGround = true;
     public Transform target_pos;
@@ -21,60 +22,37 @@ public class PlayerControl : MonoBehaviour
 
     void Awake()
     {
-        rig = GetComponent<Rigidbody2D>();
-    }
-
-    void Update()
-    {
-        isGround = Physics2D.OverlapCircle(target_pos.position, checkr, whatisGround);
-        horizontal = Input.GetAxis("Horizontal");
-        current_speed = horizontal * Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.W) && isGround)
-        {
-            jump = true;
-            rig.velocity = Vector2.up * JumpForce;
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            crouch = true;
-        }
-        else if (Input.GetKeyUp(KeyCode.S))
-        {
-            crouch = false;
-        }
+        player = GetComponent<Rigidbody2D>();
+        ini_state = GetComponent<BoxCollider2D>().size;
     }
 
     private void FixedUpdate()
     {
-        MOVE_AD();
-        JUMP();
-        CROUCH();
-    }
-
-    public void MOVE_AD ()
-    {
-        if (Input.GetKey(KeyCode.A))
+        isGround = Physics2D.OverlapCircle(target_pos.position, checkr, whatisGround);
+        horizontal = Input.GetAxis("Horizontal");
+        current_speed = horizontal * Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            transform.Translate(Vector3.back * speed * Time.deltaTime);
+            player.AddForce(new Vector2(-horizontal * speed * Time.deltaTime, 0));
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D))
         {
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            player.AddForce(new Vector2(horizontal * speed * Time.deltaTime, 0));
         }
-    }
-
-    public void JUMP ()
-    {
-        if (isGround && jump)
+        if (Input.GetKeyDown(KeyCode.W) && isGround)
         {
-            rig.AddForce(new Vector2(0, JumpForce));
+            jump = true;
+            player.AddForce(new Vector2(0, JumpForce));
             isGround = false;
         }
-    }
-
-    public void CROUCH ()
-    {
-        current_speed *= crouch_speed;
-        rig.velocity *= current_speed;
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            crouch = true;
+            GetComponent<BoxCollider2D>().size = new Vector2(ini_state.x, ini_state.y / 2);
+        }
+        else
+        {
+            GetComponent<BoxCollider2D>().size = new Vector2(ini_state.x, ini_state.y);
+        }
     }
 }
