@@ -6,13 +6,13 @@ public class PlayerControl : MonoBehaviour
 {
     public Rigidbody2D player;
 
-    private float JumpForce = 30f;
+    public float JumpForce = 30f;
     public float speed = 30f;
     public float crouch_speed = 0.5f;
-    public float current_speed = 0f;
-    public float horizontal = 0.0f;
-    public bool jump = false;
-    public bool crouch = false;
+    private bool jump = false;
+    private bool crouch = false;
+    private bool facing_left = false;
+    private bool facing_right = true;
     private Vector2 ini_state;
 
     private bool isGround = true;
@@ -31,10 +31,26 @@ public class PlayerControl : MonoBehaviour
         isGround = Physics2D.OverlapCircle(target_pos.position, checkr, whatisGround);
         if (Input.GetKey(KeyCode.A))
         {
+            if (facing_right)
+            {
+                Vector3 scale = transform.localScale;
+                scale.x *= -1;
+                transform.localScale = scale;
+            }
+            facing_right = false;
+            facing_left = true;
             transform.Translate(Vector3.left * speed * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.D))
         {
+            if (facing_left)
+            {
+                Vector3 scale = transform.localScale;
+                scale.x *= -1;
+                transform.localScale = scale;
+            }
+            facing_right = true;
+            facing_left = false;
             transform.Translate(Vector3.right * speed * Time.deltaTime);
         }
         if (Input.GetKeyDown(KeyCode.W) && isGround)
