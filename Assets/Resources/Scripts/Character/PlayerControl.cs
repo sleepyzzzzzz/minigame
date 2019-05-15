@@ -62,7 +62,7 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             crouch = true;
-            GetComponent<BoxCollider2D>().size = new Vector2(ini_state.x, ini_state.y / 2);
+            GetComponent<BoxCollider2D>().size = new Vector2(ini_state.x, ini_state.y * 0.5f);
         }
         else
         {
