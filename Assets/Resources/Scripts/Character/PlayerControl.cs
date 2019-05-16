@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    public Rigidbody2D player;
+    private Rigidbody2D player;
+    private Animator player_animator;
 
     public float JumpForce = 30f;
     public float speed = 30f;
@@ -13,7 +14,6 @@ public class PlayerControl : MonoBehaviour
     private bool crouch = false;
     private bool facing_left = false;
     private bool facing_right = true;
-    private Vector2 ini_state;
 
     private bool isGround = true;
     public Transform target_pos;
@@ -23,7 +23,7 @@ public class PlayerControl : MonoBehaviour
     void Awake()
     {
         player = GetComponent<Rigidbody2D>();
-        ini_state = GetComponent<BoxCollider2D>().size;
+        player_animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -56,17 +56,16 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W) && isGround)
         {
             jump = true;
+            player_animator.SetBool("Jump", true);
             player.AddForce(new Vector2(0, JumpForce));
             isGround = false;
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
             crouch = true;
-            GetComponent<BoxCollider2D>().size = new Vector2(ini_state.x, ini_state.y * 0.5f);
-        }
-        else
-        {
-            GetComponent<BoxCollider2D>().size = new Vector2(ini_state.x, ini_state.y);
+            // GetComponent<BoxCollider2D>().size = new Vector2(ini_state.x, ini_state.y * 0.5f);
+            player_animator.SetBool("crouch", true);
+            transform.Translate(Vector3.right * crouch_speed * Time.deltaTime);
         }
     }
 }
