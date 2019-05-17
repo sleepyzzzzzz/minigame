@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 enum TeacherState//boss状态枚举
 {
@@ -11,7 +12,6 @@ enum AttackMode//攻击模式枚举
 {
     CloseAttck,FarAttack
 }
-
 
 public class FirstBoss_Teacher : MonoBehaviour {
 
@@ -26,8 +26,8 @@ public class FirstBoss_Teacher : MonoBehaviour {
     private SpriteRenderer spriteRenderer;
 
     //远近距离范围
-    public float CloseDistance=4;
-    public float FarDistance=8;
+    public float CloseDistance=3;
+    public float FarDistance=6;
 
     //限定移动边界
     public float MoveXRightLimit=8.35f;
@@ -51,6 +51,10 @@ public class FirstBoss_Teacher : MonoBehaviour {
     //飞行道具预制体
     public GameObject ChalkPrefab;
     public GameObject BookPrefab;
+
+    //测试UI
+    public Text TurnInfo;
+    public GameObject MoveTip;
 
     void Start () {
         PlayerTransfrom = GameObject.FindGameObjectWithTag(GlobalTags.Player).transform;
@@ -114,6 +118,8 @@ public class FirstBoss_Teacher : MonoBehaviour {
                         {
                             GotoNextTurn();
                         }
+
+                        UpdateTestUI();
                     }
                 }
                 break;
@@ -122,6 +128,7 @@ public class FirstBoss_Teacher : MonoBehaviour {
                     if (Mathf.Abs(transform.position.x - MoveTargetX) < 0.1f)
                     {
                         State = TeacherState.Attack;//到达目标位置，进入攻击状态
+                        MoveTip.SetActive(false);
                     }
                     else
                     {
@@ -156,6 +163,7 @@ public class FirstBoss_Teacher : MonoBehaviour {
                 bool isRight = px > transform.position.x ? true : false;
                 MoveTargetX = Mathf.Clamp(isRight ? px - CloseDistance : px + CloseDistance, MoveXLeftLimit, MoveXRightLimit);
                 State = TeacherState.Move;
+                MoveTip.SetActive(true);
             }
         }
         else
@@ -169,8 +177,11 @@ public class FirstBoss_Teacher : MonoBehaviour {
                 bool isRight = px > transform.position.x ? true : false;
                 MoveTargetX = Mathf.Clamp(isRight ? px - FarDistance : px + FarDistance, MoveXLeftLimit, MoveXRightLimit);
                 State = TeacherState.Move;
+                MoveTip.SetActive(true);
             }
         }
+
+        UpdateTestUI();
     }
 
     //单个粉笔攻击（随机大小）
@@ -231,4 +242,10 @@ public class FirstBoss_Teacher : MonoBehaviour {
         go.AddForce(dir*BookThrowPower, ForceMode2D.Force);
     }
 
+    //更新测试UI
+    public void UpdateTestUI()
+    {
+        TurnInfo.text = "本轮门" + (isRedDoor ? "红门" : "蓝门") + "\n攻击模式：" + (attackMode == AttackMode.CloseAttck ?
+            "近距离" : "远距离") + "\n攻击次数：" + LeftAttackCount;
+    }
 }

@@ -36,7 +36,7 @@ public class PlayerPlace : MonoBehaviour {
                 rdoor_placed = true;
                 Vector2 place_pos = transform.position;
                 place_pos.x += 2;
-                red = Instantiate(RedDoorPrefab, place_pos, Quaternion.identity);
+                RedDoor = Instantiate(RedDoorPrefab, place_pos, Quaternion.identity);
             }
             Vector3 position = Input.mousePosition;
             RedDoorPrefab.GetComponent<Rigidbody2D>().isKinematic = false;
