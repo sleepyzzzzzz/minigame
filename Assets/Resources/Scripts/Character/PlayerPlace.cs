@@ -6,35 +6,50 @@ public class PlayerPlace : MonoBehaviour {
 
     public GameObject BlueDoorPrefab;
     public GameObject RedDoorPrefab;
-
-    private void Awake()
-    {
-        BlueDoorPrefab = GameObject.Find("BlueDoorPrefab");
-        RedDoorPrefab = GameObject.Find("RedDoorPrefab");
-    }
+    public GameObject BlueDoor;
+    public GameObject RedDoor;
+    private bool bdoor_placed = false;
+    private bool rdoor_placed = false;
 
     // Update is called once per frame
     void Update () {
-        if (Input.GetMouseButton(0))
+        // 放置蓝门
+        if (Input.GetKey(KeyCode.T) && !bdoor_placed)
         {
-            Instantiate(BlueDoorPrefab, transform.position, Quaternion.identity);
+            bdoor_placed = true;
+            Vector2 place_pos = transform.position;
+            place_pos.x += 2;
+            BlueDoor = Instantiate(BlueDoorPrefab, place_pos, Quaternion.identity);
         }
-        if (Input.GetMouseButton(1))
+        //放置红门
+        if (Input.GetKey(KeyCode.R) && !rdoor_placed)
         {
-            Instantiate(RedDoorPrefab, transform.position, Quaternion.identity);
+            rdoor_placed = true;
+            Vector2 place_pos = transform.position;
+            place_pos.x += 2;
+            RedDoor = Instantiate(RedDoorPrefab, place_pos, Quaternion.identity);
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1) && rdoor_placed)
         {
-            RedDoorPrefab.transform.parent = this.transform;
-            RedDoorPrefab.GetComponent<Rigidbody2D>().isKinematic = true;
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
+            if (!rdoor_placed)
+            {
+                rdoor_placed = true;
+                Vector2 place_pos = transform.position;
+                place_pos.x += 2;
+                red = Instantiate(RedDoorPrefab, place_pos, Quaternion.identity);
+            }
             Vector3 position = Input.mousePosition;
             RedDoorPrefab.GetComponent<Rigidbody2D>().isKinematic = false;
             transform.DetachChildren();
             Vector3 dir = transform.TransformDirection(position);
-            RedDoorPrefab.GetComponent<Rigidbody2D>().AddForce(dir, ForceMode2D.Impulse);
+            RedDoorPrefab.GetComponent<Rigidbody2D>().AddForce(dir, ForceMode2D.Force);
+            rdoor_placed = true;
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            BlueDoor.transform.parent = this.transform;
+            Destroy(BlueDoor, 0.1f);
+            bdoor_placed = false;
         }
     }
 }
