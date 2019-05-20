@@ -14,6 +14,7 @@ public class PlayerControl : MonoBehaviour
     private bool crouch = false;
     private bool facing_left = false;
     private bool facing_right = true;
+    private Vector3 ini_state;
 
     private bool isGround = true;
     public Transform target_pos;
@@ -24,6 +25,7 @@ public class PlayerControl : MonoBehaviour
     {
         player = GetComponent<Rigidbody2D>();
         player_animator = GetComponent<Animator>();
+        ini_state = GetComponent<Collider2D>().bounds.size;
     }
 
     private void FixedUpdate()
@@ -63,7 +65,7 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             crouch = true;
-            // GetComponent<BoxCollider2D>().size = new Vector2(ini_state.x, ini_state.y * 0.5f);
+            GetComponent<BoxCollider2D>().size = new Vector2(ini_state.x, ini_state.y * 0.5f);
             player_animator.SetBool("crouch", true);
             transform.Translate(Vector3.right * crouch_speed * Time.deltaTime);
         }
