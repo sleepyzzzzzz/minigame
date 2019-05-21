@@ -8,13 +8,12 @@ public class PlayerControl : MonoBehaviour
     private Animator player_animator;
 
     public float JumpForce = 30f;
-    public float speed = 30f;
-    public float crouch_speed = 0.5f;
-    private bool jump = false;
-    private bool crouch = false;
+    public float speed = 5f;
+    public float crouch_speed = 1.5f;
     private bool facing_left = false;
     private bool facing_right = true;
-    private Vector3 ini_state;
+    private int crouch_count = 0;
+    private bool walk;
 
     private bool isGround = true;
     public Transform target_pos;
@@ -25,19 +24,19 @@ public class PlayerControl : MonoBehaviour
     {
         player = GetComponent<Rigidbody2D>();
         player_animator = GetComponent<Animator>();
-        ini_state = GetComponent<Collider2D>().bounds.size;
     }
 
     private void FixedUpdate()
     {
         isGround = Physics2D.OverlapCircle(target_pos.position, checkr, whatisGround);
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
         if (Input.GetKey(KeyCode.A))
         {
+            walk = true;
             if (facing_right)
             {
-                Vector3 scale = transform.localScale;
-                scale.x *= -1;
-                transform.localScale = scale;
+                Flip();
             }
             facing_right = false;
             facing_left = true;
@@ -45,29 +44,68 @@ public class PlayerControl : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.D))
         {
+            walk = true;
             if (facing_left)
             {
-                Vector3 scale = transform.localScale;
-                scale.x *= -1;
-                transform.localScale = scale;
+                Flip();
             }
             facing_right = true;
             facing_left = false;
             transform.Translate(Vector3.right * speed * Time.deltaTime);
         }
+        Move_Anim();
         if (Input.GetKeyDown(KeyCode.W) && isGround)
         {
-            jump = true;
-            player_animator.SetBool("Jump", true);
             player.AddForce(new Vector2(0, JumpForce));
-            isGround = false;
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        Jump_Anim(vertical);
+        if (Input.GetKey(KeyCode.S))
         {
-            crouch = true;
-            GetComponent<BoxCollider2D>().size = new Vector2(ini_state.x, ini_state.y * 0.5f);
-            player_animator.SetBool("crouch", true);
-            transform.Translate(Vector3.right * crouch_speed * Time.deltaTime);
+            if (crouch_count == 0)
+            {
+                BoxCollider2D b = transform.GetComponent<BoxCollider2D>();
+                transform.GetComponent<BoxCollider2D>().size = new Vector2(b.size.x, b.size.y * 0.5f);
+                crouch_count += 1;
+            }
+            Crouch_Anim(horizontal);
         }
+        else if (Input.GetKeyUp(KeyCode.S))
+        {
+            BoxCollider2D b = transform.GetComponent<BoxCollider2D>();
+            transform.GetComponent<BoxCollider2D>().size = new Vector2(b.size.x, b.size.y * 2f);
+            player_animator.SetBool("crouch", false);
+            crouch_count = 0;
+        }
+    }
+
+    void Move_Anim()
+    {
+        if (walk)
+        {
+            player_animator.SetFloat("speed", Mathf.Abs(2 * speed));
+            walk = false;
+        }
+        else
+        {
+            player_animator.SetFloat("speed", Mathf.Abs(0 * speed));
+        }
+    }
+
+    void Jump_Anim(float vertical)
+    {
+        player_animator.SetFloat("verti", vertical);
+    }
+
+    void Crouch_Anim(float horizontal)
+    {
+        player_animator.SetBool("crouch", true);
+        player_animator.SetFloat("speed", Mathf.Abs(horizontal * crouch_speed));
+    }
+
+    void Flip()
+    {
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
     }
 }
