@@ -10,7 +10,6 @@ namespace Test
 {
     public class TransTest : MonoBehaviour
     {
-        public TransType type = TransType.Ready;
         // Use this for initialization
         void Start()
         {
