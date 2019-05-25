@@ -18,8 +18,8 @@ namespace Controller
         private float speed = 3f;
         private float crouch_speed = 1.5f;
         private float JumpForce = 200f;
-        static public bool facing_right = true;
-        static public bool facing_left = false;
+        public static bool facing_right = true;
+        public static bool facing_left = false;
 
         private bool walk;
         Player_State State = Player_State.Alive;
