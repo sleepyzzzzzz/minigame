@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BluePortal
   - RedPortal
+  - SmallChalk
   layers:
   - Default
   - TransparentFX
