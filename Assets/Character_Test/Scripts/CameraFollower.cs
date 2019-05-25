@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraFollower : MonoBehaviour {
     public Transform player;
-    public float smooth = 3.5f;
+    public float smooth = 5.5f;
     public float XAxis;
 
     private void FixedUpdate()
@@ -12,7 +12,7 @@ public class CameraFollower : MonoBehaviour {
         Vector3 pos = transform.position;
         if (Mathf.Abs(pos.x - player.position.x) > XAxis)
         {
-            pos.x = Mathf.Lerp(pos.x, player.position.x, smooth * Time.deltaTime);
+            pos.x = Mathf.Lerp(pos.x, player.position.x + 2f, smooth * Time.deltaTime);
         }
         transform.position = new Vector3(pos.x, transform.position.y, transform.position.z);
     }

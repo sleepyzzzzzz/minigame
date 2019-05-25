@@ -15,9 +15,9 @@ namespace Controller
 
         private Rigidbody2D player;
         private Animator player_animator;
-        private float speed = 3f;
+        private float speed = 4.5f;
         private float crouch_speed = 1.5f;
-        private float JumpForce = 200f;
+        private float JumpForce = 150f;
         public static bool facing_right = true;
         public static bool facing_left = false;
 
@@ -73,7 +73,7 @@ namespace Controller
                 transform.Translate(Vector3.right * speed * Time.deltaTime);
             }
             Move_Anim();
-            if (Input.GetKeyDown(KeyCode.W) && isGrounded())
+            if (Input.GetKey(KeyCode.W) && isGrounded())
             {
                 player.AddForce(new Vector2(0, JumpForce));
             }
