@@ -31,6 +31,7 @@ public class PlayerPlace : MonoBehaviour
             placeing = true;
             Vector3 place_pos = this.transform.position;
             place_pos.x += 2 * (PlayerController.facing_right ? 1 : -1);
+            place_pos.y -= 1.2f;
             blue = bd.Initialize(place_pos);
         }
         //放置红门
@@ -39,6 +40,7 @@ public class PlayerPlace : MonoBehaviour
             placeing = true;
             Vector3 place_pos = this.transform.position;
             place_pos.x += 2 * (PlayerController.facing_right ? 1 : -1);
+            place_pos.y -= 1.2f;
             red = rd.Initialize(place_pos);
         }
         Place_Anim();

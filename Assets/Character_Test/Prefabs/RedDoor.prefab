@@ -62,7 +62,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &61684539447951158
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RedDoorPrefab: {fileID: 1017563639389734}
-  rdoor_placed: 0
+  rdoor_placed: 1
   hit: 0
 --- !u!212 &212402586628022032
 SpriteRenderer:
