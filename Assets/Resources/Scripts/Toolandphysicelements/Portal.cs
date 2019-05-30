@@ -54,6 +54,11 @@ namespace portal
            
 
         }
+        /// <summary>判断碰撞体tag是否在允许传送的枚举类型里
+        /// 
+        /// </summary>
+        /// <param name="tagname"></param>
+        /// <returns></returns>
         public bool CheckTag(string tagname)
         {
             foreach (TransTag tag in Enum.GetValues(typeof(TransTag)))
