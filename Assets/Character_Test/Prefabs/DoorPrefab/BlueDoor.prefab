@@ -22,9 +22,10 @@ GameObject:
   - component: {fileID: 212946463459043996}
   - component: {fileID: 61609209628268034}
   - component: {fileID: 114936868052182038}
+  - component: {fileID: 114118009256728956}
   m_Layer: 0
   m_Name: BlueDoor
-  m_TagString: Untagged
+  m_TagString: BluePortal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,6 +68,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.02, y: 3.67}
   m_EdgeRadius: 0
+--- !u!114 &114118009256728956
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1590157249617582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18c59323aaf81bc42a766f45968a9159, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114936868052182038
 MonoBehaviour:
   m_ObjectHideFlags: 1

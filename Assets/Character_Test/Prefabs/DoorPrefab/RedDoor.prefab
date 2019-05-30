@@ -23,9 +23,10 @@ GameObject:
   - component: {fileID: 50956041245672730}
   - component: {fileID: 61684539447951158}
   - component: {fileID: 114485984656959782}
+  - component: {fileID: 114571369226472320}
   m_Layer: 0
   m_Name: RedDoor
-  m_TagString: Untagged
+  m_TagString: RedPortal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,6 +103,17 @@ MonoBehaviour:
   RedDoorPrefab: {fileID: 1017563639389734}
   rdoor_placed: 1
   hit: 0
+--- !u!114 &114571369226472320
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1017563639389734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18c59323aaf81bc42a766f45968a9159, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212402586628022032
 SpriteRenderer:
   m_ObjectHideFlags: 1
