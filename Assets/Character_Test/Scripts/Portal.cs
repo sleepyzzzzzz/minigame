@@ -7,7 +7,7 @@ using Test;
 
 namespace portal
 {
-
+   
     public class Portal : MonoBehaviour
     {
         public static TransType type = TransType.Ready;

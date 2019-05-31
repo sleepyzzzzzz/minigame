@@ -1,17 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TransferManage;
 
 public class BlueDoor : MonoBehaviour
 {
-    public GameObject BlueDoorPrefab;
+    //public GameObject BlueDoorPrefab;
     private GameObject blue;
     public bool bdoor_placed = false;
     public bool hit = false;
 
-    public GameObject Initialize(Vector3 place_pos)
+    public GameObject Initialize(GameObject doorprefab, Vector3 place_pos)
     {
-        blue = Instantiate(BlueDoorPrefab, place_pos, Quaternion.identity);
+        blue = Instantiate(doorprefab, place_pos, Quaternion.identity);
         bdoor_placed = true;
         return blue;
     }
