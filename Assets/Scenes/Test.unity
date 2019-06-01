@@ -258,6 +258,7 @@ GameObject:
   - component: {fileID: 354456114}
   - component: {fileID: 354456116}
   - component: {fileID: 354456118}
+  - component: {fileID: 354456119}
   m_Layer: 0
   m_Name: PLAYER
   m_TagString: Player
@@ -758,8 +759,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 575dd95a2aef7ab46b4d8376ba193393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlueDoor: {fileID: 1149262581435716, guid: 151a39765b82641428a48fa9f12816a3, type: 2}
-  RedDoor: {fileID: 1017563639389734, guid: c7fdf1f1ec84346b99e827960a992dc1, type: 2}
+--- !u!114 &354456119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 354456111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c44281f57bd46e59c171c4bdc254d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BlueDoorPrefab: {fileID: 1149262581435716, guid: 151a39765b82641428a48fa9f12816a3,
+    type: 2}
+  RedDoorPrefab: {fileID: 1017563639389734, guid: c7fdf1f1ec84346b99e827960a992dc1,
+    type: 2}
 --- !u!1 &399150107
 GameObject:
   m_ObjectHideFlags: 0
