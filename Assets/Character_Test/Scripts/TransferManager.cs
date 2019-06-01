@@ -35,7 +35,7 @@ namespace TransferManage
         /// <summary>传送门资源路径
         /// 
         /// </summary>
-        private string doorpath = "Prefabs/DoorPrefab";
+        public static string doorpath = "Prefabs/DoorPrefab";
         void Awake()
         {
 
@@ -58,7 +58,7 @@ namespace TransferManage
         /// 根据传入类型在场景中加载传送门
         /// </summary>
         /// <param name="type"></param>
-        public GameObject instalize(PortalType type, Vector3 transform)
+        public static GameObject instalize(PortalType type, Vector3 transform)
         {
             Debug.Log(type + "门初始化");
             GameObject door = Instantiate(Resources.Load(doorpath + "/" + type.ToString() + "DoorPrefab"), transform, Quaternion.identity) as GameObject;

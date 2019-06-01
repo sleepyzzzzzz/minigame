@@ -30,7 +30,7 @@ public class PlayerPlace : MonoBehaviour
             Vector3 place_pos = this.transform.position;
             place_pos.x += 3 * (PlayerController.facing_right ? 1 : -1);
             place_pos.y -= 1.2f;
-            blue = GetComponent<TransferManager>().instalize(PortalType.Blue, place_pos);
+            blue = TransferManager.instalize(PortalType.Blue, place_pos);
         }
         //放置红门
         if (Input.GetKey(KeyCode.R) && !RedDoor.rdoor_placed)
@@ -39,7 +39,7 @@ public class PlayerPlace : MonoBehaviour
             Vector3 place_pos = this.transform.position;
             place_pos.x += 3 * (PlayerController.facing_right ? 1 : -1);
             place_pos.y -= 1.2f;
-            red = GetComponent<TransferManager>().instalize(PortalType.Red, place_pos);
+            red = TransferManager.instalize(PortalType.Red, place_pos);
         }
         Place_Anim();
         //鼠标右键
@@ -49,7 +49,7 @@ public class PlayerPlace : MonoBehaviour
             {
                 Vector3 place_pos = this.transform.position;
                 place_pos.x += 3 * (PlayerController.facing_right ? 1 : -1);
-                red = GetComponent<TransferManager>().instalize(PortalType.Red, place_pos);
+                red = TransferManager.instalize(PortalType.Red, place_pos);
             }
             throwing = true;
             transform.DetachChildren();
