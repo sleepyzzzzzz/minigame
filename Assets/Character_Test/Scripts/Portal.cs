@@ -32,9 +32,7 @@ namespace portal
                         string i = this.tag;
                         this.tag = "Untagged";
                         GameObject target = GameObject.FindGameObjectWithTag(i);
-                        //target.GetComponent<BoxCollider2D>().enabled = false;
                         collision.gameObject.transform.position = target.transform.position;
-                        // target.GetComponent<BoxCollider2D>().enabled = true ;
                         this.tag = i;
                     }
                     else

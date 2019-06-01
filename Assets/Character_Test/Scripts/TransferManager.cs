@@ -20,6 +20,7 @@ namespace TransferManage
     public enum TransTag
     {
         Player,
+        BlueBall,
     }
     /// <summary>角色传送状态枚举
     /// 
@@ -42,14 +43,7 @@ namespace TransferManage
         }
         void Update()
         {
-            ///鼠标左键抬起后，在鼠标所点击的世界坐标生成红门
-            ///Todo:测试用，后期和主角交互的同学对接
-            //if (Input.GetMouseButtonUp(0))
-            //{
-            //    Vector3 vector = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //    Debug.Log(vector);
-            //    instalize(PortalType.Red, vector);
-            //}
+
 
 
 
