@@ -108,93 +108,47 @@ namespace Controller
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            var tag = collision.collider.tag;
-            switch (Collide)
+            switch (collision.collider.tag)
             {
-                case Collision_Object.SmallChalk:
-                    if (tag == "SmallChalk")
-                    {
-                        first_chalk_hit_count++;
-                        player_animator.SetBool("hurt", true);
-                    }
+                case "SmallChalk":
+                    first_chalk_hit_count++;
+                    player_animator.SetBool("hurt", true);
                     break;
-                case Collision_Object.BlueBall:
-                    if (tag == "BlueBall")
-                    {
-                        ball_hit_count++;
-                        player_animator.SetBool("hurt", true);
-                    }
+                case "BlueBall":
+                    ball_hit_count++;
+                    player_animator.SetBool("hurt", true);
                     break;
-                case Collision_Object.BlackBall:
-                    if (tag == "BlackBall")
-                    {
-                        ball_hit_count++;
-                        player_animator.SetBool("hurt", true);
-                    }
-                    break;
-            }
-        }
-
-        private void OnCollisionStay2D(Collision2D collision)
-        {
-            var tag = collision.collider.tag;
-            switch (Collide)
-            {
-                case Collision_Object.SmallChalk:
-                    if (tag == "SmallChalk")
-                    {
-                        player_animator.SetBool("hurt", true);
-                    }
-                    break;
-                case Collision_Object.BlueBall:
-                    if (tag == "BlueBall")
-                    {
-                        player_animator.SetBool("hurt", true);
-                    }
-                    break;
-                case Collision_Object.BlackBall:
-                    if (tag == "BlackBall")
-                    {
-                        player_animator.SetBool("hurt", true);
-                    }
+                case "BlackBall":
+                    ball_hit_count++;
+                    player_animator.SetBool("hurt", true);
                     break;
             }
         }
 
         private void OnCollisionExit2D(Collision2D collision)
         {
-            var tag = collision.collider.tag;
-            switch (Collide)
+            switch (collision.collider.tag)
             {
-                case Collision_Object.SmallChalk:
-                    if (tag != "SmallChalk")
+                case "SmallChalk":
+                    player_animator.SetBool("hurt", false);
+                    if (first_chalk_hit_count == 3)
                     {
-                        player_animator.SetBool("hurt", false);
-                        if (first_chalk_hit_count == 3)
-                        {
-                            State = Player_State.Dead;
-                        }
+                        State = Player_State.Dead;
                     }
                     break;
-                case Collision_Object.BlueBall:
-                    if (tag != "BlueBall")
+                case "BlueBall":
+                    player_animator.SetBool("hurt", false);
+                    if (ball_hit_count == 2)
                     {
-                        player_animator.SetBool("hurt", false);
-                        if (ball_hit_count == 2)
-                        {
-                            State = Player_State.Dead;
-                        }
+                        State = Player_State.Dead;
                     }
                     break;
-                case Collision_Object.BlackBall:
-                    if (tag != "BlackBall")
+                case "BlackBall":
+                    player_animator.SetBool("hurt", false);
+                    if (ball_hit_count == 2)
                     {
-                        player_animator.SetBool("hurt", false);
-                        if (ball_hit_count == 2)
-                        {
-                            State = Player_State.Dead;
+                        State = Player_State.Dead;
 
-                        }
                     }
                     break;
             }
