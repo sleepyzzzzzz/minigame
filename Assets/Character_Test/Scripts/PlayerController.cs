@@ -18,7 +18,7 @@ namespace Controller
     public class PlayerController : MonoBehaviour
     {
         private Rigidbody2D player;
-        private Animator player_animator;
+        private static Animator player_animator;
         private float speed = 4.5f;
         private float crouch_speed = 1.5f;
         private float JumpForce = 150f;
@@ -28,7 +28,6 @@ namespace Controller
         private int first_chalk_hit_count = 0;
 
         private bool walk;
-        public static bool hurt;
         Player_State State = Player_State.Alive;
         Collision_Object Collide = Collision_Object.SmallChalk;
 
@@ -87,7 +86,6 @@ namespace Controller
                 player.AddForce(new Vector2(0, JumpForce));
             }
             Move_Anim(vertical);
-            Got_Hurt();
         }
 
         void Flip()
@@ -105,18 +103,6 @@ namespace Controller
             return (hit.collider.gameObject != gameObject);
         }
 
-        public void Got_Hurt()
-        {
-            if (hurt)
-            {
-                player_animator.SetBool("hurt", true);
-            }
-            else
-            {
-                player_animator.SetBool("hurt", false);
-            }
-        }
-
         private void OnCollisionEnter2D(Collision2D collision)
         {
             switch (Collide)
@@ -126,8 +112,7 @@ namespace Controller
                     if (tag == "SmallChalk")
                     {
                         first_chalk_hit_count++;
-                        //player_animator.SetBool("hurt", true);
-                        hurt = true;
+                        player_animator.SetBool("hurt", true);
                     }
                     break;
             }
@@ -141,8 +126,7 @@ namespace Controller
                     var tag = collision.collider.tag;
                     if (tag == "SmallChalk")
                     {
-                        //player_animator.SetBool("hurt", true);
-                        hurt = true;
+                        player_animator.SetBool("hurt", true);
                     }
                     break;
             }
@@ -156,7 +140,6 @@ namespace Controller
                     var tag = collision.collider.tag;
                     if (tag != "SmallChalk")
                     {
-                        hurt = false;
                         player_animator.SetBool("hurt", false);
                         if (first_chalk_hit_count == 3)
                         {
@@ -184,6 +167,11 @@ namespace Controller
         void Jump_Anim(float vertical)
         {
             player_animator.SetFloat("verti", vertical);
+        }
+
+        public static void Got_Hurt(bool hurt_boolean)
+        {
+            player_animator.SetBool("hurt", hurt_boolean);
         }
     }
 }
