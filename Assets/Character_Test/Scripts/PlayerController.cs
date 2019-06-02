@@ -10,7 +10,9 @@ public enum Player_State
 
 public enum Collision_Object
 {
-    SmallChalk
+    SmallChalk,
+    BlueBall,
+    BlackBall
 }
 
 namespace Controller
@@ -26,6 +28,7 @@ namespace Controller
         public static bool facing_left = false;
 
         private int first_chalk_hit_count = 0;
+        private int ball_hit_count = 0;
 
         private bool walk;
         Player_State State = Player_State.Alive;
@@ -105,13 +108,27 @@ namespace Controller
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
+            var tag = collision.collider.tag;
             switch (Collide)
             {
                 case Collision_Object.SmallChalk:
-                    var tag = collision.collider.tag;
                     if (tag == "SmallChalk")
                     {
                         first_chalk_hit_count++;
+                        player_animator.SetBool("hurt", true);
+                    }
+                    break;
+                case Collision_Object.BlueBall:
+                    if (tag == "BlueBall")
+                    {
+                        ball_hit_count++;
+                        player_animator.SetBool("hurt", true);
+                    }
+                    break;
+                case Collision_Object.BlackBall:
+                    if (tag == "BlackBall")
+                    {
+                        ball_hit_count++;
                         player_animator.SetBool("hurt", true);
                     }
                     break;
@@ -120,11 +137,23 @@ namespace Controller
 
         private void OnCollisionStay2D(Collision2D collision)
         {
+            var tag = collision.collider.tag;
             switch (Collide)
             {
                 case Collision_Object.SmallChalk:
-                    var tag = collision.collider.tag;
                     if (tag == "SmallChalk")
+                    {
+                        player_animator.SetBool("hurt", true);
+                    }
+                    break;
+                case Collision_Object.BlueBall:
+                    if (tag == "BlueBall")
+                    {
+                        player_animator.SetBool("hurt", true);
+                    }
+                    break;
+                case Collision_Object.BlackBall:
+                    if (tag == "BlackBall")
                     {
                         player_animator.SetBool("hurt", true);
                     }
@@ -134,16 +163,37 @@ namespace Controller
 
         private void OnCollisionExit2D(Collision2D collision)
         {
+            var tag = collision.collider.tag;
             switch (Collide)
             {
                 case Collision_Object.SmallChalk:
-                    var tag = collision.collider.tag;
                     if (tag != "SmallChalk")
                     {
                         player_animator.SetBool("hurt", false);
                         if (first_chalk_hit_count == 3)
                         {
                             State = Player_State.Dead;
+                        }
+                    }
+                    break;
+                case Collision_Object.BlueBall:
+                    if (tag != "BlueBall")
+                    {
+                        player_animator.SetBool("hurt", false);
+                        if (ball_hit_count == 2)
+                        {
+                            State = Player_State.Dead;
+                        }
+                    }
+                    break;
+                case Collision_Object.BlackBall:
+                    if (tag != "BlackBall")
+                    {
+                        player_animator.SetBool("hurt", false);
+                        if (ball_hit_count == 2)
+                        {
+                            State = Player_State.Dead;
+
                         }
                     }
                     break;
