@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using BlueDoorPrefab;
-using RedDoorPrefab;
 
 namespace TransferManage
 {
@@ -56,14 +54,6 @@ namespace TransferManage
         {
             Debug.Log(type + "门初始化");
             GameObject door = Instantiate(Resources.Load(doorpath + "/" + type.ToString() + "DoorPrefab"), transform, Quaternion.identity) as GameObject;
-            if (type == PortalType.Blue)
-            {
-                BlueDoor.bdoor_placed = true;
-            }
-            else if (type == PortalType.Red)
-            {
-                RedDoor.rdoor_placed = true;
-            }
             return door;
         }
     }

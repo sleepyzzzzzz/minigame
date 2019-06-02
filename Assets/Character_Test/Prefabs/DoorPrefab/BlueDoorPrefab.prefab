@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4832538458905632}
   - component: {fileID: 212964631881489660}
   - component: {fileID: 61882744319127472}
-  - component: {fileID: 114071281611481288}
   - component: {fileID: 114870896302873498}
   m_Layer: 0
   m_Name: BlueDoorPrefab
@@ -68,19 +67,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.02, y: 3.67}
   m_EdgeRadius: 0
---- !u!114 &114071281611481288
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1149262581435716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90f31a5082ece4dfb98cd97dd1cfe4e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bdoor_placed: 1
-  hit: 0
 --- !u!114 &114870896302873498
 MonoBehaviour:
   m_ObjectHideFlags: 1

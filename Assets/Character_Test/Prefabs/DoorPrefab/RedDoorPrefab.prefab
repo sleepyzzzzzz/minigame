@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 212402586628022032}
   - component: {fileID: 50956041245672730}
   - component: {fileID: 61684539447951158}
-  - component: {fileID: 114485984656959782}
   - component: {fileID: 114571369226472320}
   m_Layer: 0
   m_Name: RedDoorPrefab
@@ -89,19 +88,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.56, y: 2.56}
   m_EdgeRadius: 0
---- !u!114 &114485984656959782
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1017563639389734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2456f02d386c64696964d47a09831641, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rdoor_placed: 1
-  hit: 0
 --- !u!114 &114571369226472320
 MonoBehaviour:
   m_ObjectHideFlags: 1
