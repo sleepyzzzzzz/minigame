@@ -28,7 +28,7 @@ namespace Controller
         private int first_chalk_hit_count = 0;
 
         private bool walk;
-        private bool hurt;
+        public static bool hurt;
         Player_State State = Player_State.Alive;
         Collision_Object Collide = Collision_Object.SmallChalk;
 
@@ -87,6 +87,7 @@ namespace Controller
                 player.AddForce(new Vector2(0, JumpForce));
             }
             Move_Anim(vertical);
+            Got_Hurt();
         }
 
         void Flip()
@@ -104,6 +105,18 @@ namespace Controller
             return (hit.collider.gameObject != gameObject);
         }
 
+        public void Got_Hurt()
+        {
+            if (hurt)
+            {
+                player_animator.SetBool("hurt", true);
+            }
+            else
+            {
+                player_animator.SetBool("hurt", false);
+            }
+        }
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             switch (Collide)
@@ -113,7 +126,8 @@ namespace Controller
                     if (tag == "SmallChalk")
                     {
                         first_chalk_hit_count++;
-                        player_animator.SetBool("hurt", true);
+                        //player_animator.SetBool("hurt", true);
+                        hurt = true;
                     }
                     break;
             }
@@ -127,7 +141,8 @@ namespace Controller
                     var tag = collision.collider.tag;
                     if (tag == "SmallChalk")
                     {
-                        player_animator.SetBool("hurt", true);
+                        //player_animator.SetBool("hurt", true);
+                        hurt = true;
                     }
                     break;
             }
@@ -141,6 +156,7 @@ namespace Controller
                     var tag = collision.collider.tag;
                     if (tag != "SmallChalk")
                     {
+                        hurt = false;
                         player_animator.SetBool("hurt", false);
                         if (first_chalk_hit_count == 3)
                         {
