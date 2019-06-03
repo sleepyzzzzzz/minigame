@@ -19,8 +19,9 @@ namespace TransferManage
     {
         Player,
         BlueBall,
+        TechBall
     }
-    /// <summary>角色传送状态枚举
+    /// <summary>传送状态枚举
     /// 
     /// </summary>
     public enum TransType
