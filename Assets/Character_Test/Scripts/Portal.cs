@@ -35,6 +35,20 @@ namespace portal
                         collision.gameObject.transform.position = target.transform.position;
                         this.tag = i;
                     }
+                    else if (CheckTag(collision.gameObject.tag) && (this.tag == "RedPortal" && GameObject.FindGameObjectsWithTag("BluePortal").Length == 1))
+                    {
+                        Debug.Log("进入入口门");
+                        type = TransType.Transfering;
+                        GameObject target = GameObject.FindGameObjectWithTag("BluePortal");
+                        collision.gameObject.transform.position = target.transform.position;
+                    }
+                    else if (CheckTag(collision.gameObject.tag) && (this.tag == "BluePortal" && GameObject.FindGameObjectsWithTag("RedPortal").Length == 1))
+                    {
+                        Debug.Log("进入入口门");
+                        type = TransType.Transfering;
+                        GameObject target = GameObject.FindGameObjectWithTag("RedPortal");
+                        collision.gameObject.transform.position = target.transform.position;
+                    }
                     else
                     {
                         Debug.Log("非法碰撞");
