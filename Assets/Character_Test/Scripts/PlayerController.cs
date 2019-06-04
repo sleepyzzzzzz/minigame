@@ -5,7 +5,7 @@ using UnityEngine;
 public enum Player_State
 {
     Alive,
-    Dead
+    Dead,
 }
 
 public enum Collision_Object
@@ -50,10 +50,10 @@ namespace Controller
                     Action();
                     break;
                 case Player_State.Dead:
+                    player_animator.SetBool("running", false);
+                    player_animator.SetBool("hurt", false);
+                    player_animator.SetFloat("verti", 0.0f);
                     player_animator.SetBool("fail", true);
-                    //player_animator.SetBool("running", false);
-                    //player_animator.SetBool("hurt", false);
-                    //player_animator.SetFloat("verti", 0.0f);
                     break;
             }
         }

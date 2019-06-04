@@ -29,8 +29,8 @@ namespace Placer
             {
                 placeing = true;
                 Vector3 place_pos = this.transform.position;
-                place_pos.x += 3 * (PlayerController.facing_right ? 1 : -1);
-                place_pos.y -= 1.2f;
+                place_pos.x += 2.5f * (PlayerController.facing_right ? 1 : -1);
+                place_pos.y -= 0.3f;
                 blue = TransferManager.instalize(PortalType.Blue, place_pos);
                 bdoor_placed = true;
             }
@@ -39,8 +39,8 @@ namespace Placer
             {
                 placeing = true;
                 Vector3 place_pos = this.transform.position;
-                place_pos.x += 3 * (PlayerController.facing_right ? 1 : -1);
-                place_pos.y -= 1.2f;
+                place_pos.x += 2.5f * (PlayerController.facing_right ? 1 : -1);
+                place_pos.y -= 0.5f;
                 red = TransferManager.instalize(PortalType.Red, place_pos);
                 rdoor_placed = true;
             }
@@ -51,7 +51,7 @@ namespace Placer
                 if (!rdoor_placed)
                 {
                     Vector3 place_pos = this.transform.position;
-                    place_pos.x += 3 * (PlayerController.facing_right ? 1 : -1);
+                    place_pos.x += 2.0f * (PlayerController.facing_right ? 1 : -1);
                     red = TransferManager.instalize(PortalType.Red, place_pos);
                     rdoor_placed = true;
                 }
