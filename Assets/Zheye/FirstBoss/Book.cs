@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Book : MonoBehaviour {
+public class Book : MonoBehaviour
+{
     void OnCollisionEnter2D(Collision2D coll)
     {
         Debug.Log("Book Collision:" + coll.collider.tag);
@@ -16,3 +17,5 @@ public class Book : MonoBehaviour {
         }
     }
 }
+
+
