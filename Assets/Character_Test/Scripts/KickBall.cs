@@ -26,9 +26,10 @@ public class KickBall : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0) && draw)
         {
+            this.transform.GetComponent<Rigidbody2D>().isKinematic = false;
             Destroy(lrObj, 0.1f);
             Vector3 direction = endpos - startpos;
-            this.transform.GetComponent<Rigidbody2D>().velocity = new Vector3(direction.x, direction.y, direction.z) * 1.5f;
+            this.transform.GetComponent<Rigidbody2D>().velocity = new Vector3(direction.x, direction.y, direction.z) * 2.5f;
             draw = false;
         }
     }
