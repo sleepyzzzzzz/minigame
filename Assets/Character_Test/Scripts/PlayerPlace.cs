@@ -30,7 +30,7 @@ namespace Placer
                 placeing = true;
                 Vector3 place_pos = this.transform.position;
                 place_pos.x += 2.5f * (PlayerController.facing_right ? 1 : -1);
-                place_pos.y -= 0.3f;
+                place_pos.y -= 0.1f;
                 blue = TransferManager.instalize(PortalType.Blue, place_pos);
                 bdoor_placed = true;
             }
