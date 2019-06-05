@@ -2,67 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//public class KickBall : MonoBehaviour {
-
-//    private LineRenderer lr;
-//    private float dragforce = 10f;
-//    private bool drag = false;
-//    private Vector3 initialmouseposition;
-//    private Vector3 finalMousePosition = Vector3.zero;
-//    int i = 0;
-
-//    private void Start()
-//    {
-//        initialmouseposition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-//        lr = transform.GetComponent<LineRenderer>();
-//    }
-
-//    void Update()
-//    {
-//        if (Input.GetMouseButtonDown(0))
-//        {
-//            lr = this.transform.GetComponent<LineRenderer>();
-//            lr.SetColors(Color.blue, Color.blue);
-//            lr.SetWidth(0.2f, 0.2f);
-//            i = 0;
-//        }
-//        if (Input.GetMouseButton(0))
-//        {
-            //i++;
-            //lr.SetVertexCount(i);
-            //lr.SetPosition(i - 1, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 15)));
-//        }
-//        //if (Input.GetMouseButtonDown(0))
-//        //{
-//        //    drag = true;
-//        //}
-//        //if (Input.GetMouseButtonUp(0))
-//        //{
-//        //    drag = false;
-//        //    //lastMousePosition = Vector3.zero;
-//        //    float x = initialmouseposition.x - finalMousePosition.x;
-//        //    float y = initialmouseposition.y - finalMousePosition.y;
-//        //    Vector2 direction = new Vector2(x, y);
-//        //    this.transform.GetComponent<Rigidbody2D>().AddForce(direction * dragforce, ForceMode2D.Force);
-//        //}
-//        //if (drag)
-//        //{
-//        //    //Vector3 offset = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-//        //    //this.transform.position += offset;
-//        //    if (finalMousePosition != Vector3.zero)
-//        //    {
-//        //        Vector3 offset = Camera.main.ScreenToWorldPoint(Input.mousePosition) - finalMousePosition;
-//        //        this.transform.position += offset;
-//        //    }
-//        //    finalMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-//        //}
-//    }
-
-
-//}
-
-
 public class KickBall : MonoBehaviour
 {
     public GameObject lrPrefab;
@@ -87,8 +26,10 @@ public class KickBall : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0) && draw)
         {
+            this.transform.GetComponent<Rigidbody2D>().isKinematic = false;
             Destroy(lrObj, 0.1f);
-            this.transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(endpos.x, endpos.y) * 50, ForceMode2D.Force);
+            Vector3 direction = endpos - startpos;
+            this.transform.GetComponent<Rigidbody2D>().velocity = new Vector3(direction.x, direction.y, direction.z) * 2.5f;
             draw = false;
         }
     }
