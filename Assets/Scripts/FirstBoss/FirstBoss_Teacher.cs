@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 enum TeacherState//boss状态枚举
 {
     Move,Attack
