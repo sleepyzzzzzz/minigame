@@ -38,6 +38,7 @@ namespace Placer
             switch (level)
             {
                 case Level.Level1:
+                    Level1Skill();
                     break;
                 case Level.Level2:
                     Level2Skill();
@@ -49,7 +50,7 @@ namespace Placer
 
         private void BasicSkill()
         {
-            if (Input.GetKey(KeyCode.T) && !bdoor_placed)
+            if (Input.GetMouseButtonDown(0) && !bdoor_placed)
             {
                 bdoor_placed = true;
                 placeing = true;
@@ -59,18 +60,6 @@ namespace Placer
                 place_pos.y -= 0.5f;
                 blue = TransferManager.instalize(PortalType.Blue, place_pos);
             }
-            //放置红门
-            if (Input.GetKey(KeyCode.R) && !rdoor_placed)
-            {
-                rdoor_placed = true;
-                placeing = true;
-                player_animator.SetBool("place", true);
-                Vector3 place_pos = this.transform.position;
-                place_pos.x += 2.5f * (PlayerController.facing_right ? 1 : -1);
-                place_pos.y -= 0.5f;
-                red = TransferManager.instalize(PortalType.Red, place_pos);
-            }
-            Place_Anim();
             //E键回收
             if (Input.GetKey(KeyCode.E))
             {
@@ -90,18 +79,31 @@ namespace Placer
             Withdraw_Anim();
         }
 
+        private void Level1Skill()
+        {
+            if (Input.GetMouseButtonDown(1) && !rdoor_placed)
+            {
+                rdoor_placed = true;
+                placeing = true;
+                player_animator.SetBool("place", true);
+                Vector3 place_pos = this.transform.position;
+                place_pos.x += 2.5f * (PlayerController.facing_right ? 1 : -1);
+                place_pos.y -= 0.5f;
+                red = TransferManager.instalize(PortalType.Red, place_pos);
+            }
+            Place_Anim();
+        }
+
         private void Level2Skill()
         {
             //鼠标右键
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) && !rdoor_placed)
             {
-                if (!rdoor_placed)
-                {
-                    Vector3 place_pos = this.transform.position;
-                    place_pos.x += 2.0f * (PlayerController.facing_right ? 1 : -1);
-                    red = TransferManager.instalize(PortalType.Red, place_pos);
-                    rdoor_placed = true;
-                }
+                Vector3 place_pos = this.transform.position;
+                place_pos.x += 2.0f * (PlayerController.facing_right ? 1 : -1);
+                red = TransferManager.instalize(PortalType.Red, place_pos);
+                rdoor_placed = true;
+                placeing = true;
                 throwing = true;
                 transform.DetachChildren();
                 //抛物线投掷定点
@@ -115,13 +117,13 @@ namespace Placer
                 red.GetComponent<Rigidbody2D>().AddForce(dirc * initialV * 40f, ForceMode2D.Force);
             }
             Throw_Anim();
+            Place_Anim();
         }
 
         private void Place_Anim()
         {
             if (placeing && (bdoor_placed || rdoor_placed))
             {
-                //player_animator.SetBool("place", true);
                 placeing = false;
             }
             else
