@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TransferManage;
+using Controller;
 using System;
 using Test;
 
@@ -25,6 +26,7 @@ namespace portal
             switch (type)
             {
                 case TransType.Ready:
+                    int facing = PlayerController.facing_right ? 1 : -1;
                     if (CheckTag(collision.gameObject.tag) && GameObject.FindGameObjectsWithTag(this.tag).Length == 2)
                     {
                         Debug.Log("进入入口门");
@@ -40,14 +42,14 @@ namespace portal
                         Debug.Log("进入入口门");
                         type = TransType.Transfering;
                         GameObject target = GameObject.FindGameObjectWithTag("BluePortal");
-                        collision.gameObject.transform.position = target.transform.position;
+                        collision.gameObject.transform.position = new Vector3(target.transform.position.x + 1f * facing, target.transform.position.y, target.transform.position.z);
                     }
                     else if (CheckTag(collision.gameObject.tag) && (this.tag == "BluePortal" && GameObject.FindGameObjectsWithTag("RedPortal").Length == 1))
                     {
                         Debug.Log("进入入口门");
                         type = TransType.Transfering;
                         GameObject target = GameObject.FindGameObjectWithTag("RedPortal");
-                        collision.gameObject.transform.position = target.transform.position;
+                        collision.gameObject.transform.position = new Vector3(target.transform.position.x + 1.9f * facing, target.transform.position.y, target.transform.position.z);;
                     }
                     else
                     {
