@@ -1,12 +1,20 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Controller;
 using TransferManage;
 
+public enum Level
+{
+    Level1,
+    Level2,
+    Level3
+}
+
+
 namespace Placer
 {
-    public class PlayerPlace : MonoBehaviour
+    public class PlayerSkill : MonoBehaviour
     {
         private GameObject blue;
         private GameObject red;
@@ -18,33 +26,72 @@ namespace Placer
         private bool throwing;
         private bool withdraw;
 
+        Level level = Level.Level1;
+        
         private void Start()
         {
             player_animator = GetComponent<Animator>();
         }
-
+        
         public void FixedUpdate()
+        {
+            switch (level)
+            {
+                case Level.Level1:
+                    BasicSkill();
+                    break;
+                case Level.Level2:
+                    BasicSkill();
+                    Level2Skill();
+                    break;
+            }
+        }
+
+        private void BasicSkill()
         {
             if (Input.GetKey(KeyCode.T) && !bdoor_placed)
             {
+                bdoor_placed = true;
                 placeing = true;
+                player_animator.SetBool("place", true);
                 Vector3 place_pos = this.transform.position;
                 place_pos.x += 2.5f * (PlayerController.facing_right ? 1 : -1);
                 place_pos.y -= 0.5f;
                 blue = TransferManager.instalize(PortalType.Blue, place_pos);
-                bdoor_placed = true;
             }
             //放置红门
             if (Input.GetKey(KeyCode.R) && !rdoor_placed)
             {
+                rdoor_placed = true;
                 placeing = true;
+                player_animator.SetBool("place", true);
                 Vector3 place_pos = this.transform.position;
                 place_pos.x += 2.5f * (PlayerController.facing_right ? 1 : -1);
                 place_pos.y -= 0.5f;
                 red = TransferManager.instalize(PortalType.Red, place_pos);
-                rdoor_placed = true;
             }
             Place_Anim();
+            //鼠标左键
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (bdoor_placed)
+                {
+                    withdraw = true;
+                    Destroy(blue, 0.1f);
+                    bdoor_placed = false;
+                }
+                if (rdoor_placed)
+                {
+                    withdraw = true;
+                    Destroy(red, 0.1f);
+                    rdoor_placed = false;
+                }
+            }
+            Withdraw_Anim();
+        }
+
+        private void Level2Skill()
+        {
             //鼠标右键
             if (Input.GetMouseButtonDown(1))
             {
@@ -68,30 +115,13 @@ namespace Placer
                 red.GetComponent<Rigidbody2D>().AddForce(dirc * initialV * 40f, ForceMode2D.Force);
             }
             Throw_Anim();
-            //鼠标左键
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (bdoor_placed)
-                {
-                    withdraw = true;
-                    Destroy(blue, 0.1f);
-                    bdoor_placed = false;
-                }
-                if (rdoor_placed)
-                {
-                    withdraw = true;
-                    Destroy(red, 0.1f);
-                    rdoor_placed = false;
-                }
-            }
-            Withdraw_Anim();
         }
 
         private void Place_Anim()
         {
             if (placeing && (bdoor_placed || rdoor_placed))
             {
-                player_animator.SetBool("place", true);
+                //player_animator.SetBool("place", true);
                 placeing = false;
             }
             else
