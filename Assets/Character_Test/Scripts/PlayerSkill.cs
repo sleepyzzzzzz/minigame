@@ -11,7 +11,6 @@ public enum Level
     Level3
 }
 
-
 namespace Placer
 {
     public class PlayerSkill : MonoBehaviour
@@ -27,22 +26,23 @@ namespace Placer
         private bool withdraw;
 
         Level level = Level.Level1;
-        
+
         private void Start()
         {
             player_animator = GetComponent<Animator>();
         }
-        
+
         public void FixedUpdate()
         {
+            BasicSkill();
             switch (level)
             {
                 case Level.Level1:
-                    BasicSkill();
                     break;
                 case Level.Level2:
-                    BasicSkill();
                     Level2Skill();
+                    break;
+                case Level.Level3:
                     break;
             }
         }
@@ -157,3 +157,4 @@ namespace Placer
         }
     }
 }
+
