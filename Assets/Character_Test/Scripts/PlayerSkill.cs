@@ -71,8 +71,8 @@ namespace Placer
                 red = TransferManager.instalize(PortalType.Red, place_pos);
             }
             Place_Anim();
-            //鼠标左键
-            if (Input.GetMouseButtonDown(0))
+            //E键回收
+            if (Input.GetKey(KeyCode.E))
             {
                 if (bdoor_placed)
                 {
