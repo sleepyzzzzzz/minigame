@@ -61,7 +61,6 @@ namespace Controller
         void Action()
         {
             float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
             if (Input.GetKey(KeyCode.A))
             {
                 walk = true;
@@ -87,8 +86,9 @@ namespace Controller
             if (Input.GetKey(KeyCode.W) && isGrounded())
             {
                 player.AddForce(new Vector2(0, JumpForce));
+                player_animator.SetFloat("verti", 1.5f);
             }
-            Move_Anim(vertical);
+            Move_Anim();
         }
 
         void Flip()
@@ -104,6 +104,35 @@ namespace Controller
             Vector2 start = new Vector2(bounds.center.x, bounds.min.y - bounds.size.y * 0.1f);
             RaycastHit2D hit = Physics2D.Linecast(start, bounds.center);
             return (hit.collider.gameObject != gameObject);
+        }
+
+        void Move_Anim()
+        {
+            if (walk)
+            {
+                player_animator.SetBool("running", true);
+                walk = false;
+            }
+            else
+            {
+                player_animator.SetBool("running", false);
+            }
+            Jump_Anim();
+        }
+
+        void Jump_Anim()
+        {
+            if (isGrounded()){
+                player_animator.SetFloat("verti", 0.0f);
+            }
+            else{
+                player_animator.SetFloat("verti", 1.5f);
+            }
+        }
+
+        public static void Got_Hurt(bool hurt_boolean)
+        {
+            player_animator.SetBool("hurt", hurt_boolean);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -152,30 +181,6 @@ namespace Controller
                     }
                     break;
             }
-        }
-
-        void Move_Anim(float vertical)
-        {
-            if (walk)
-            {
-                player_animator.SetBool("running", true);
-                walk = false;
-            }
-            else
-            {
-                player_animator.SetBool("running", false);
-            }
-            Jump_Anim(vertical);
-        }
-
-        void Jump_Anim(float vertical)
-        {
-            player_animator.SetFloat("verti", vertical);
-        }
-
-        public static void Got_Hurt(bool hurt_boolean)
-        {
-            player_animator.SetBool("hurt", hurt_boolean);
         }
     }
 }
