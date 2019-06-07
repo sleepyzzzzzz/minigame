@@ -57,7 +57,7 @@ namespace Placer
                 player_animator.SetBool("place", true);
                 Vector3 place_pos = this.transform.position;
                 place_pos.x += 2.5f * (PlayerController.facing_right ? 1 : -1);
-                place_pos.y -= 0.5f;
+                //place_pos.y -= 0.5f;
                 blue = TransferManager.instalize(PortalType.Blue, place_pos);
             }
             //E键回收
@@ -88,7 +88,7 @@ namespace Placer
                 player_animator.SetBool("place", true);
                 Vector3 place_pos = this.transform.position;
                 place_pos.x += 2.5f * (PlayerController.facing_right ? 1 : -1);
-                place_pos.y -= 0.5f;
+                //place_pos.y -= 0.5f;
                 red = TransferManager.instalize(PortalType.Red, place_pos);
             }
             Place_Anim();
