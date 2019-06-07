@@ -12,6 +12,7 @@ namespace CZF
         /// </summary>
         private GameObject StartAnimUI;
         private Button StartButton;
+        //private Button AboutButton;
 
         /// <summary>
         /// 界面渐隐
@@ -25,21 +26,22 @@ namespace CZF
         /// StartCG
         /// </summary>
         private Image[] CGImages;
-        public string[] CGTexts=new string[3] { "这是第一张CG", "这是第二张CG", "这是第三张CG" };
+        public string[] CGTexts=new string[4] { "这是第一张图片", "这是第二张图片", "这是第三张图片", "这是第四张图片" };
 
-        public float ImageShowTime;
-        public float ImageExistTime;
-        public float ImageFadeTime;
+        private float ImageShowTime;
+        public float ImageFadeTime=1f;
 
         public float WordDivide = 70;//字间距
         public float SingleWordShowTime = 0.2f;//每字显现间隔时间
         public float TextFadeTime = 2f;//一行字消失时间
         public float WordStartShowY = 20f;//字开始出现的高度
-        public float SwitchLineTime = 0.8f;//每行字暂停时间
-        public float TextExistTime = 1f;//每行字切换间隔时间
+        public float SwitchLineTime = 0.8f;//每行字切换间隔时间
+        public float TextExistTime = 1f;//每行字停留时间
         public GameObject TextPrefab;
         Vector2 StartPos = Vector2.zero;
         List<Text> texts = new List<Text>();
+
+        private Image mask2;
 
         void Start()
         {
@@ -47,8 +49,9 @@ namespace CZF
             StartButton = transform.Find("StartUI").Find("StartButton").GetComponent<Button>();
             StartButton.onClick.AddListener(OnStartButtonClick);
             mask = transform.Find("mask").GetComponent<Image>();
+            mask2 = transform.Find("mask2").GetComponent<Image>();
             CGImages = transform.Find("CGAnim").GetComponentsInChildren<Image>();
-            StartPos = transform.Find("CGAnim").Find("TextAnim").position;
+            StartPos = transform.Find("CGAnim").Find("TextAnim").GetComponent<RectTransform>().anchoredPosition;
             InitText();
         }
 
@@ -64,7 +67,8 @@ namespace CZF
                     StartAnimUI.SetActive(false);
                     mask.color = new Color(mask.color.r, mask.color.g, mask.color.b, TargetMaskAlpha);
                     IsAniming = false;
-                    StartCGAnim();
+                    StartCoroutine(ShowStartCG());
+                    StartCoroutine(ShowCGText());
                 }
             }
         }
@@ -75,9 +79,15 @@ namespace CZF
             TargetMaskAlpha = 1f;
         }
 
-        public void StartCGAnim()
+        IEnumerator ShowStartCG()
         {
-
+            for (int i = 0; i < CGImages.Length; i++)
+            {
+                ImageShowTime = SingleWordShowTime * CGTexts[i].Length;
+                StartCoroutine(ImageAlphaAnim(CGImages[i], 1, ImageShowTime));
+                yield return new WaitForSeconds(ImageShowTime+TextExistTime+TextFadeTime+SwitchLineTime);   
+            }
+            StartCoroutine(ImageAlphaAnim(mask2, 1, ImageFadeTime));
         }
 
         //初始化文字组件
@@ -113,7 +123,7 @@ namespace CZF
         }
 
         //开始显示文字的协程
-        IEnumerator ShowText()
+        IEnumerator ShowCGText()
         {
             for (int i = 0; i < CGTexts.Length; i++)
             {
