@@ -12,7 +12,7 @@ namespace CZF
         /// </summary>
         private GameObject StartAnimUI;
         private Button StartButton;
-        //private Button AboutButton;
+        //private Button AboutButton;  关于
 
         /// <summary>
         /// 界面渐隐
