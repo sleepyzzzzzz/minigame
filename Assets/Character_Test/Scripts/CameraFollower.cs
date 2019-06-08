@@ -1,19 +1,21 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollower : MonoBehaviour {
     public Transform player;
-    public float smooth = 5.5f;
-    public float XAxis;
+    private float smooth = 5.5f;
+    public float xmin;
+    public float xmax;
 
     private void FixedUpdate()
     {
-        Vector3 pos = transform.position;
-        if (Mathf.Abs(pos.x - player.position.x) > XAxis)
+        Vector3 pos = this.transform.position;
+        if (Mathf.Abs(pos.x - player.position.x) > 0.0f)
         {
-            pos.x = Mathf.Lerp(pos.x, player.position.x + 2f, smooth * Time.deltaTime);
+            pos.x = Mathf.Lerp(pos.x, player.position.x, smooth);
         }
-        transform.position = new Vector3(pos.x, transform.position.y, transform.position.z);
+        pos.x = Mathf.Clamp(pos.x, xmin, xmax);
+        this.transform.position = new Vector3(pos.x, transform.position.y, transform.position.z);
     }
 }

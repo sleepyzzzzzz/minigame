@@ -243,7 +243,7 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
+  m_HDR: 0
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
@@ -277,8 +277,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1545941270}
-  smooth: 5.5
-  XAxis: 0
+  xmin: -14.23
+  xmax: 6.22
 --- !u!1 &1317312109
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,6 +288,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1317312110}
+  - component: {fileID: 1317312111}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -311,6 +312,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &1317312111
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317312109}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0.08
+  m_Points:
+  - {x: -22.09735, y: -6.097635}
+  - {x: -22.09735, y: 3.8791137}
+  - {x: 16.12991, y: 3.879114}
+  - {x: 16.12991, y: -6.097635}
 --- !u!1 &1545941262
 GameObject:
   m_ObjectHideFlags: 0
@@ -859,6 +880,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u6559\u5BA4"
       objectReference: {fileID: 0}
+    - target: {fileID: 2717159992567666227, guid: aaac138d47f53d74bbbecaa8683d9d72,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 2717159992567666228, guid: aaac138d47f53d74bbbecaa8683d9d72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -937,32 +963,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1738225265}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1749685557 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2717159992567666227, guid: aaac138d47f53d74bbbecaa8683d9d72,
-    type: 3}
-  m_PrefabInstance: {fileID: 1738225265}
-  m_PrefabAsset: {fileID: 0}
---- !u!68 &1749685558
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1749685557}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 2802bcc5d7d95405d829285c00c5bfbf, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0.08
-  m_Points:
-  - {x: -32.801376, y: -8.599072}
-  - {x: -32.80138, y: 8.606174}
-  - {x: 32.808453, y: 8.606174}
-  - {x: 32.80845, y: -8.599072}
 --- !u!1001 &2120379880
 PrefabInstance:
   m_ObjectHideFlags: 0
