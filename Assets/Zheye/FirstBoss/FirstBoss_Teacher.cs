@@ -60,6 +60,9 @@ public class FirstBoss_Teacher : MonoBehaviour {
     private static readonly string IdleStr = "待机";
     private static readonly string ThrowStr = "扔";
 
+    private float ThrowTimer = 0;
+    private bool isThrowing=false;
+
 
     void Start () {
         PlayerTransfrom = GameObject.FindGameObjectWithTag(GlobalTags.Player).transform;
@@ -83,11 +86,19 @@ public class FirstBoss_Teacher : MonoBehaviour {
                     AnimComponent.armature.flipX = PlayerTransfrom.position.x > transform.position.x ? true : false;
 
                     WaitAttackTimer += Time.deltaTime;
+                    if (isThrowing) ThrowTimer += Time.deltaTime;
+                    if(ThrowTimer>1f)
+                    {
+                        ThrowTimer = 0;
+                        isThrowing = false;
+                    }
                     if (WaitAttackTimer > AttackFrequency)//计时器计满，开始攻击
                     {
                         if(AnimState.name!=ThrowStr)
                         {
                             AnimState = AnimComponent.animation.Play(ThrowStr);
+                            AnimState.timeScale = 2f;
+                            isThrowing = true;
                         }
                         //计时器清零，攻击次数减少
                         WaitAttackTimer = 0;
@@ -131,7 +142,7 @@ public class FirstBoss_Teacher : MonoBehaviour {
                     }
                     else
                     {
-                        if (AnimState.name != IdleStr)
+                        if (AnimState.name != IdleStr&&!isThrowing)
                         {
                             AnimState = AnimComponent.animation.Play(IdleStr);
                         }
