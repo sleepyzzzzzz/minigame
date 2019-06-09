@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DragonBones;
 
 
 enum TeacherState//boss状态枚举
@@ -20,19 +21,20 @@ public class FirstBoss_Teacher : MonoBehaviour {
     AttackMode attackMode=AttackMode.CloseAttck;//攻击模式
 
     private float MoveTargetX;//移动目标位置
-    private Transform PlayerTransfrom;//玩家位置
+    private UnityEngine.Transform PlayerTransfrom;//玩家位置
     public bool isRedDoor;//这一轮是什么门
 
     //自身组件
-    private SpriteRenderer spriteRenderer;
+    private UnityArmatureComponent AnimComponent;
+    private DragonBones.AnimationState AnimState;
 
     //远近距离范围
     public float CloseDistance=4;
     public float FarDistance=8;
 
     //限定移动边界
-    public float MoveXRightLimit=8.35f;
-    public float MoveXLeftLimit=-8.35f;
+    public float MoveXRightLimit=14f;
+    public float MoveXLeftLimit=-15f;
     [Space]
     public float AttackFrequency=3f;//攻击频率
     private float WaitAttackTimer = 0;//攻击间隔计时器
@@ -44,19 +46,29 @@ public class FirstBoss_Teacher : MonoBehaviour {
     public float BigChalkSpeed=5;
     public float SmallChalkSize=1;
     public float SmallChalkSpeed=8;
-    public float ThreeSmallChalkAttackFrequency=0.5f;
+    public float ThreeSmallChalkAttackFrequency=0.6f;
     public float BookSize=1;
-    public float BookThrowAngle=45;
-    public float BookThrowPower=200;
+    public Vector2 ThrowVector = new Vector2(0.8f,1);
+    public float BookThrowPower=400;
 
     //飞行道具预制体
     public GameObject ChalkPrefab;
     public GameObject BookPrefab;
 
+    //动画名称
+    private static readonly string WalkStr = "行走";
+    private static readonly string IdleStr = "待机";
+    private static readonly string ThrowStr = "扔";
+
+    private float ThrowTimer = 0;
+    private bool isThrowing=false;
+
+
     void Start () {
         PlayerTransfrom = GameObject.FindGameObjectWithTag(GlobalTags.Player).transform;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        AnimComponent = GetComponent<UnityArmatureComponent>();
         GotoNextTurn();
+        AnimState= AnimComponent.animation.Play(IdleStr);
     }
 	
 	void Update () {
@@ -71,11 +83,23 @@ public class FirstBoss_Teacher : MonoBehaviour {
             case TeacherState.Attack:
                 {
                     //攻击状态下随时更新boss朝向
-                    spriteRenderer.flipX = PlayerTransfrom.position.x > transform.position.x ? true : false;
+                    AnimComponent.armature.flipX = PlayerTransfrom.position.x > transform.position.x ? true : false;
 
                     WaitAttackTimer += Time.deltaTime;
+                    if (isThrowing) ThrowTimer += Time.deltaTime;
+                    if(ThrowTimer>1f)
+                    {
+                        ThrowTimer = 0;
+                        isThrowing = false;
+                    }
                     if (WaitAttackTimer > AttackFrequency)//计时器计满，开始攻击
                     {
+                        if(AnimState.name!=ThrowStr)
+                        {
+                            AnimState = AnimComponent.animation.Play(ThrowStr);
+                            AnimState.timeScale = 2f;
+                            isThrowing = true;
+                        }
                         //计时器清零，攻击次数减少
                         WaitAttackTimer = 0;
                         LeftAttackCount--;
@@ -116,6 +140,13 @@ public class FirstBoss_Teacher : MonoBehaviour {
                             GotoNextTurn();
                         }
                     }
+                    else
+                    {
+                        if (AnimState.name != IdleStr&&!isThrowing)
+                        {
+                            AnimState = AnimComponent.animation.Play(IdleStr);
+                        }
+                    }
                 }
                 break;
             case TeacherState.Move:
@@ -128,14 +159,19 @@ public class FirstBoss_Teacher : MonoBehaviour {
                     {
                         //朝目标移动
                         bool isRight= MoveTargetX > transform.position.x ? true : false;
-                        spriteRenderer.flipX = isRight;
+                        AnimComponent.armature.flipX = isRight;
                         float MoveX = isRight ? MoveSpeed : -MoveSpeed;
                         transform.Translate(new Vector3(MoveX * Time.deltaTime, 0, 0));
+                        if(AnimState.name!=WalkStr)
+                        {
+                            AnimState = AnimComponent.animation.Play(WalkStr);
+                        }
                     }
                 }
                 break;
         }
     }
+
 
 
     //进入下一轮
@@ -177,8 +213,9 @@ public class FirstBoss_Teacher : MonoBehaviour {
     //单个粉笔攻击（随机大小）
     private void RandomSingleChalkAttack()
     {
+        Debug.Log("SingleChalk");
         //生成粉笔并朝向主角
-        Transform go = Instantiate(ChalkPrefab,transform.position,Quaternion.LookRotation(PlayerTransfrom.position-transform.position)).transform;
+        UnityEngine.Transform go = Instantiate(ChalkPrefab,transform.position,Quaternion.LookRotation(PlayerTransfrom.position-transform.position)).transform;
         go.Rotate(0, -90, 0);
         go.SetParent(transform);
         Chalk chalk = go.GetComponent<Chalk>();
@@ -208,9 +245,10 @@ public class FirstBoss_Teacher : MonoBehaviour {
     //小粉笔三连击
     private IEnumerator ThreeChalkAttack()
     {
+        Debug.Log("ThreeChalk");
         for (int i = 0; i <= 2; i++)
         {
-            Transform go = Instantiate(ChalkPrefab, transform.position, Quaternion.LookRotation(PlayerTransfrom.position - transform.position)).transform;
+            UnityEngine.Transform go = Instantiate(ChalkPrefab, transform.position, Quaternion.LookRotation(PlayerTransfrom.position - transform.position)).transform;
             go.Rotate(0, -90, 0);
             go.SetParent(transform);
             Chalk chalk = go.GetComponent<Chalk>();
@@ -224,12 +262,12 @@ public class FirstBoss_Teacher : MonoBehaviour {
     //练习册攻击
     private void BookAttack()
     {
-        Rigidbody2D go = Instantiate(BookPrefab, transform.position, Quaternion.identity).GetComponent<Rigidbody2D>();
+        Debug.Log("Book");
+        Rigidbody2D go = Instantiate(BookPrefab, transform.position+Vector3.up*1.5f, Quaternion.identity).GetComponent<Rigidbody2D>();
         //根据角度和力量将物体抛掷出去
         int xDir = PlayerTransfrom.position.x > transform.position.x?1:-1;
-        float rate=1f/Mathf.Tan(Mathf.PI * BookThrowAngle / 180f);//计算x向量和y向量比值
-        Vector2 dir = new Vector2(xDir*rate, 1);
-        go.AddForce(dir*BookThrowPower, ForceMode2D.Force);
+        Vector2 vec = ThrowVector * BookThrowPower*new Vector2(xDir,1);
+        go.AddForce(vec, ForceMode2D.Force);
     }
 
 }
