@@ -16,7 +16,8 @@ public class Chalk : MonoBehaviour {
         {
             case "Player":
                 //扣除生命值
-                if(!isBigChalk)Destroy(gameObject);
+                //if(!isBigChalk)
+                Destroy(gameObject);
                 break;
             case "ground":
                 Destroy(gameObject);
