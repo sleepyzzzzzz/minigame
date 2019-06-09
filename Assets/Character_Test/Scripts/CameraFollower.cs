@@ -11,9 +11,9 @@ public class CameraFollower : MonoBehaviour {
     private void FixedUpdate()
     {
         Vector3 pos = this.transform.position;
-        if (Mathf.Abs(pos.x - player.position.x) > 0.0f)
+        if (Mathf.Abs(pos.x - player.position.x) > 0.2f)
         {
-            pos.x = Mathf.Lerp(pos.x, player.position.x, smooth);
+            pos.x = Mathf.Lerp(pos.x, player.position.x, smooth * Time.deltaTime);
         }
         pos.x = Mathf.Clamp(pos.x, xmin, xmax);
         this.transform.position = new Vector3(pos.x, transform.position.y, transform.position.z);

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -848,7 +848,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 108
   orthographic: 1
   orthographic size: 5
   m_Depth: -1
@@ -874,7 +874,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1283923935}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.93, y: 1.13, z: -4.39}
+  m_LocalPosition: {x: -14.23, y: 1.13, z: -4.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -893,8 +893,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1545941270}
-  xmin: -7
-  xmax: 10
+  xmin: -14.23
+  xmax: 6.23
 --- !u!1 &1317312109
 GameObject:
   m_ObjectHideFlags: 0
@@ -904,6 +904,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1317312110}
+  - component: {fileID: 1317312111}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -928,6 +929,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &1317312111
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317312109}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0.08
+  m_Points:
+  - {x: -22.09314, y: -6.109393}
+  - {x: -22.093143, y: 3.9001374}
+  - {x: 16.13671, y: 3.900137}
+  - {x: 16.136711, y: -6.1004257}
 --- !u!1 &1521956828 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3923465796345988810, guid: 1130872153ea99f4a8b3b9638d40ed9f,

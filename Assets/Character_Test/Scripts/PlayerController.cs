@@ -31,6 +31,7 @@ namespace Controller
         private int ball_hit_count = 0;
 
         private bool walk;
+        private bool hurt;
         Player_State State = Player_State.Alive;
         Collision_Object Collide = Collision_Object.SmallChalk;
 
@@ -130,54 +131,65 @@ namespace Controller
             }
         }
 
-        public static void Got_Hurt(bool hurt_boolean)
-        {
-            player_animator.SetBool("hurt", hurt_boolean);
-        }
-
         private void OnCollisionEnter2D(Collision2D collision)
         {
             switch (collision.collider.tag)
             {
                 case "SmallChalk":
                     first_chalk_hit_count++;
-                    player_animator.SetBool("hurt", true);
+                    hurt = true;
                     break;
                 case "BlueBall":
                     ball_hit_count++;
-                    player_animator.SetBool("hurt", true);
+                    hurt = true;
                     break;
                 case "BlackBall":
                     ball_hit_count++;
-                    player_animator.SetBool("hurt", true);
+                    hurt = true;
                     break;
+            }
+            Hurt_Anim();
+            Dead_State();
+        }
+
+        private void Hurt_Anim()
+        {
+            if (hurt)
+            {
+                player_animator.SetBool("hurt", true);
+                hurt = false;
+            }
+            else
+            {
+                player_animator.SetBool("hurt", false);
             }
         }
 
-        private void OnCollisionExit2D(Collision2D collision)
+        public static void Got_Hurt(bool hurt_boolean)
         {
-            switch (collision.collider.tag)
+            player_animator.SetBool("hurt", hurt_boolean);
+        }
+
+        public void Dead_State()
+        {
+            switch (Collide)
             {
-                case "SmallChalk":
-                    player_animator.SetBool("hurt", false);
+                case Collision_Object.SmallChalk:
                     if (first_chalk_hit_count == 3)
                     {
                         State = Player_State.Dead;
                     }
                     break;
-                case "BlueBall":
-                    player_animator.SetBool("hurt", false);
+                case Collision_Object.BlueBall:
                     if (ball_hit_count == 2)
                     {
                         State = Player_State.Dead;
                     }
                     break;
-                case "BlackBall":
-                    player_animator.SetBool("hurt", false);
+                case Collision_Object.BlackBall:
                     if (ball_hit_count == 2)
                     {
                         State = Player_State.Dead;
-
                     }
                     break;
             }
