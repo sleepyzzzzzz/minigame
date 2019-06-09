@@ -817,7 +817,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582833686}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.32, y: -0.07, z: -2.8}
+  m_LocalPosition: {x: 25.3, y: -0.07, z: -2.8}
   m_LocalScale: {x: 0.16, y: 0.16, z: 0.16}
   m_Children: []
   m_Father: {fileID: 0}
@@ -919,8 +919,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 582833694}
-  smooth: 5.5
-  XAxis: 0
+  xmin: 25.32
+  xmax: 75.23
 --- !u!1 &750480968
 GameObject:
   m_ObjectHideFlags: 0
@@ -995,7 +995,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 750480968}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 82.08, y: -2.9128, z: 29.212137}
+  m_LocalPosition: {x: 82.049, y: -2.9128, z: 29.212137}
   m_LocalScale: {x: 1.1622998, y: 1.1622998, z: 1.1622998}
   m_Children: []
   m_Father: {fileID: 911454960}
@@ -1014,7 +1014,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -3.7711887}
+  m_Offset: {x: 0, y: -3.830166}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1025,7 +1025,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20.67, y: 0.9496694}
+  m_Size: {x: 20.632904, y: 0.988389}
   m_EdgeRadius: 0
 --- !u!1 &911454959
 GameObject:
@@ -1036,6 +1036,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 911454960}
+  - component: {fileID: 911454961}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -1059,3 +1060,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &911454961
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911454959}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0.08
+  m_Points:
+  - {x: 26.35315, y: -7.947979}
+  - {x: 26.35315, y: 2.098037}
+  - {x: 94.057945, y: 2.0980372}
+  - {x: 94.05795, y: -7.9479795}
