@@ -26,11 +26,15 @@ public class Level1Manager : MonoBehaviour
 
     public Text BigChalkText;
     public Text BookText;
+
+    public Image mask;
+    public GameObject WinUI;
     
     private void Awake()
     {
         _instance = this;
     }
+
 
     public void PlayerGetHurt()
     {
@@ -66,6 +70,21 @@ public class Level1Manager : MonoBehaviour
 
     public void Level1Win()
     {
-        Debug.Log("胜利");
+        StartCoroutine(ImageAlphaAnim(mask, 1, 1.5f));
+        WinUI.SetActive(true);
+    }
+
+    IEnumerator ImageAlphaAnim(Image image, float EndValue, float time)
+    {
+        int timer = 0;
+        int frameCount = (int)(time / Time.fixedDeltaTime);
+        float Step = (EndValue - image.color.a) / frameCount;
+        while (timer < frameCount)
+        {
+            image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + Step);
+            timer++;
+            yield return 0;
+        }
+        image.color = new Color(image.color.r, image.color.g, image.color.b, EndValue);
     }
 }
