@@ -15,6 +15,7 @@ public class Chalk : MonoBehaviour {
         switch(coll.collider.tag)
         {
             case "Player":
+                if (!isBigChalk) Level1Manager.Instance.PlayerGetHurt();
                 Destroy(gameObject);
                 break;
             case "ground":

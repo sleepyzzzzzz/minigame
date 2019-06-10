@@ -31,6 +31,7 @@ namespace portal
                 if(collision.collider.GetComponent<Chalk>().isBigChalk)
                 {
                     Debug.Log("传送大粉笔成功");
+                    if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Level1—boss") Level1Manager.Instance.GetBigChalk();
                 }
                 else
                 {
@@ -48,6 +49,7 @@ namespace portal
             if(collision.collider.tag=="Book"&&this.tag=="BluePortal")
             {
                 Debug.Log("传送练习册成功");
+                if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Level1—boss") Level1Manager.Instance.GetBook();
             }
 
             switch (type)

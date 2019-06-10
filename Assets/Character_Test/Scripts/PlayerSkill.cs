@@ -79,6 +79,7 @@ namespace Placer
                     RedColdTimer = 0;
                     RedisCold = false;
                     RedColdImg.SetActive(false);
+                    if(rdoor_placed)rdoor_placed = false;
                 }
             }
             if(BlueisCold)
@@ -90,6 +91,7 @@ namespace Placer
                     BlueColdTimer = 0;
                     BlueisCold = false;
                     BlueColdImg.SetActive(false);
+                    if(bdoor_placed)bdoor_placed = false;
                 }
             }
 
