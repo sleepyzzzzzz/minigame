@@ -5,6 +5,7 @@ using TransferManage;
 using Controller;
 using System;
 using Test;
+using Placer;
 
 namespace portal
 {
@@ -23,6 +24,32 @@ namespace portal
         private void OnCollisionEnter2D(Collision2D collision)
         {
             Debug.Log("进入碰撞");
+
+            //与粉笔碰撞
+            if (collision.collider.tag == "SmallChalk")
+            {
+                if(collision.collider.GetComponent<Chalk>().isBigChalk)
+                {
+                    Debug.Log("传送大粉笔成功");
+                }
+                else
+                {
+                    if (this.tag == "BluePortal")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSkill>().SetBlueCold();
+                    }
+                    else if (this.tag == "RedPortal")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSkill>().SetRedCold();
+                    }
+                    Destroy(gameObject);
+                }
+            }
+            if(collision.collider.tag=="Book"&&this.tag=="BluePortal")
+            {
+                Debug.Log("传送练习册成功");
+            }
+
             switch (type)
             {
                 case TransType.Ready:
@@ -62,10 +89,7 @@ namespace portal
                 case TransType.Over:
                     Debug.Log("等待离开出口门");
                     break;
-
-
             }
-           
 
         }
         /// <summary>判断碰撞体tag是否在允许传送的枚举类型里

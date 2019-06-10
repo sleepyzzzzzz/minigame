@@ -15,11 +15,13 @@ public class Chalk : MonoBehaviour {
         switch(coll.collider.tag)
         {
             case "Player":
-                //扣除生命值
-                //if(!isBigChalk)
                 Destroy(gameObject);
                 break;
             case "ground":
+                Destroy(gameObject);
+                break;
+            case "RedPortal":
+            case "BluePortal":
                 Destroy(gameObject);
                 break;
             default:

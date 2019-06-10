@@ -12,6 +12,10 @@ public class Book : MonoBehaviour
             case "ground":
                 Destroy(gameObject);
                 break;
+            case "BluePortal":
+            case "RedPortal":
+                Destroy(gameObject);
+                break;
             default:
                 break;
         }
