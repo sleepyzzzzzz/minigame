@@ -23,7 +23,10 @@ public class Balls : MonoBehaviour
                 Destroy(gameObject);
                 break;
             case "BluePortal":
-                Destroy(gameObject, 0.1f);
+                if(this.tag == "BlueBall")
+                {
+                    Destroy(gameObject, 0.1f);
+                }
                 break;
             default:
                 break;

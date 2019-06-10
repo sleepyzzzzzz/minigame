@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 1540166180743396762}
   - component: {fileID: 7415807608115970623}
   - component: {fileID: 1007456159137073337}
+  - component: {fileID: 2008542233931246937}
   m_Layer: 0
   m_Name: BlueBall
-  m_TagString: Untagged
+  m_TagString: BlueBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,3 +133,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 5
+--- !u!114 &2008542233931246937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5684140649031022100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4355045f19fa33f40b3680f589174a79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

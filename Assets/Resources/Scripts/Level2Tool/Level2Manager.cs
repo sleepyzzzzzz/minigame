@@ -16,7 +16,7 @@ namespace LevelManage
         Charge,
         ReadyToShoot,
         ShootSuccess,
-        ShootFailed
+        ShootFailed,
     }
     /// <summary>观察者模式，当监听到场景内关键事件发生后广播给所有订阅者
     /// 
@@ -30,7 +30,7 @@ namespace LevelManage
         /// <summary>玩家射门成功的次数
         /// 
         /// </summary>
-        private static int ShootSuccessNum = 0;
+        public static int ShootSuccessNum = 0;
         /// <summary>第二关道具（除了传送门）的prefab资源路径
         /// 
         /// </summary>

@@ -6,6 +6,7 @@ using Clock;
 using Controller;
 using LevelManage;
 using Level2Tool;
+using wind;
 
 enum Classmate_State
 {
@@ -29,6 +30,7 @@ public class SecondBoss_Classmate : MonoBehaviour
     public float RedZone_speed;
     public float GreenZone_speed;
     private bool over;
+    private bool X_generate = false;
     [Space]
     public float RedZone_xmin;
     public float RedZone_xmax;
@@ -44,8 +46,11 @@ public class SecondBoss_Classmate : MonoBehaviour
     private float WaitMoveTimer = 0f;
 
     //动画名称
-    private static readonly string WalkStr = "行走";
     private static readonly string IdleStr = "待机";
+    private static readonly string WalkStr = "行走";
+    private static readonly string AttackStr = "踢球";
+    private static readonly string DefendStr = "防守";
+
 
     Classmate_State State = Classmate_State.Move;
 
@@ -55,6 +60,10 @@ public class SecondBoss_Classmate : MonoBehaviour
         PlayerTransfrom = GameObject.FindGameObjectWithTag("Player").transform;
         AnimComponent = GetComponent<UnityArmatureComponent>();
         AnimState = AnimComponent.animation.Play(IdleStr);
+        Level2Manager.Instance().ReadyToShoot += ChangeToDefend;
+        Level2Manager.Instance().ReadyToShoot += Trigger_Wind2;
+        Level2Manager.Instance().ShootSuccess += ChangeToMove;
+        Level2Manager.Instance().ShootFailed += ChangeToMove;
     }
 
     // Update is called once per frame
@@ -74,14 +83,22 @@ public class SecondBoss_Classmate : MonoBehaviour
                     }
                     else
                     {
-                        //朝目标移动
-                        bool isRight = MoveTargetX > transform.position.x ? true : false;
-                        AnimComponent.armature.flipX = isRight;
-                        float MoveX = isRight ? RedZone_speed : -RedZone_speed;
-                        transform.Translate(new Vector3(MoveX * Time.deltaTime, 0, 0));
-                        if (AnimState.name != WalkStr)
+                        if (!X_generate)
                         {
-                            AnimState = AnimComponent.animation.Play(WalkStr);
+                            MoveTargetX = Random.Range(RedZone_xmin, RedZone_xmax);
+                            X_generate = true;
+                        }
+                        else
+                        {
+                            //朝目标移动
+                            bool isRight = MoveTargetX > transform.position.x ? true : false;
+                            AnimComponent.armature.flipX = isRight;
+                            float MoveX = isRight ? RedZone_speed : -RedZone_speed;
+                            transform.Translate(new Vector3(MoveX * Time.deltaTime, 0, 0));
+                            if (AnimState.name != WalkStr)
+                            {
+                                AnimState = AnimComponent.animation.Play(WalkStr);
+                            }
                         }
                     }
                 }
@@ -114,8 +131,8 @@ public class SecondBoss_Classmate : MonoBehaviour
                     if (round_attack == 0)
                     {
                         MoveTargetX = Random.Range(RedZone_xmin, RedZone_xmax);
-                        State = Classmate_State.Move;
                         WaitMoveTimer = 0f;
+                        State = Classmate_State.Move;
                     }
                 }
                 else
@@ -127,8 +144,25 @@ public class SecondBoss_Classmate : MonoBehaviour
                 }
                 break;
             case Classmate_State.Defend:
+                if (Mathf.Abs(transform.position.x - MoveTargetX) < 0.1f)
+                {
+                    AnimComponent.armature.flipX = PlayerTransfrom.position.x > transform.position.x ? true : false;
+                }
+                else
+                {
+                    Moving(GreenZone_speed);
+                }
                 break;
         }
+    }
+
+    private void Moving(float speed)
+    {
+        bool isRight = MoveTargetX > transform.position.x ? true : false;
+        AnimComponent.armature.flipX = isRight;
+        float MoveX = isRight ? speed : -speed;
+        transform.Translate(new Vector3(MoveX * Time.deltaTime, 0, 0));
+        WaitMoveTimer = 0f;
     }
 
     private void Rand_Ball(GameObject ballprefab)
@@ -138,6 +172,44 @@ public class SecondBoss_Classmate : MonoBehaviour
         go.SetParent(transform);
         Balls balls = go.GetComponent<Balls>();
         balls.Speed = ballspeed;
+    }
+
+    private void ChangeToDefend()
+    {
+        MoveTargetX = Random.Range(GreenZone_xmin, GreenZone_xmax);
+        State = Classmate_State.Defend;
+    }
+
+    private void ChangeToMove()
+    {
+        MoveTargetX = Random.Range(RedZone_xmin, RedZone_xmax);
+        State = Classmate_State.Move;
+    }
+
+    private void Trigger_Wind1()
+    {
+        if (Level2Manager.ShootSuccessNum == 1 || Level2Manager.ShootSuccessNum == 2)
+        {
+            if (State == Classmate_State.Attack)
+            {
+                if (Random.value < 0.5)
+                {
+                    //触发风
+
+                }
+            }
+        }
+    }
+
+    private void Trigger_Wind2()
+    {
+        if (Level2Manager.ShootSuccessNum == 2)
+        {
+            if (Random.value < 0.5)
+            {
+                //触发风
+            }
+        }
     }
 
     private void TimeUp()
