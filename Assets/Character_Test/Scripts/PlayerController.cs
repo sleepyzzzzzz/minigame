@@ -32,7 +32,7 @@ namespace Controller
 
         private bool walk;
         private bool hurt;
-        Player_State State = Player_State.Alive;
+        public static Player_State State = Player_State.Alive;
         Collision_Object Collide = Collision_Object.SmallChalk;
 
         // Use this for initialization
