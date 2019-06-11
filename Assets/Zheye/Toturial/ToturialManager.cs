@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ToturialManager : MonoBehaviour
 {
+    [TextArea]
     public string ToturialStr;
     public KeyCode ListenKey;
     private bool isListening=false;

@@ -202,6 +202,20 @@ namespace Placer
                 player_animator.SetBool("withdraw", false);
             }
         }
+
+        public void Level1DoorSpawn(PortalType type)
+        {
+            if(type==PortalType.Blue)
+            {
+                bdoor_placed = true;
+                blue = GameObject.FindGameObjectWithTag("BluePortal");
+            }
+            else
+            {
+                rdoor_placed = true;
+                red = GameObject.FindGameObjectWithTag("RedPortal");
+            }
+        }
     }
 }
 
