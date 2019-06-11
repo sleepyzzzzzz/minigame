@@ -51,6 +51,7 @@ namespace Controller
                     Action();
                     break;
                 case Player_State.Dead:
+                    Debug.Log("fail");
                     player_animator.SetBool("running", false);
                     player_animator.SetBool("hurt", false);
                     player_animator.SetFloat("verti", 0.0f);
@@ -149,7 +150,7 @@ namespace Controller
                     break;
             }
             Hurt_Anim();
-            Dead_State();
+            Dead_State(collision.collider.tag);
         }
 
         private void Hurt_Anim()
@@ -170,23 +171,24 @@ namespace Controller
             player_animator.SetBool("hurt", hurt_boolean);
         }
 
-        public void Dead_State()
+        public void Dead_State(string tag)
         {
-            switch (Collide)
+            Debug.Log(ball_hit_count);
+            switch (tag)
             {
-                case Collision_Object.SmallChalk:
+                case "SmallChalk":
                     if (first_chalk_hit_count == 3)
                     {
                         State = Player_State.Dead;
                     }
                     break;
-                case Collision_Object.BlueBall:
+                case "BlueBall":
                     if (ball_hit_count == 2)
                     {
                         State = Player_State.Dead;
                     }
                     break;
-                case Collision_Object.BlackBall:
+                case "BlackBall":
                     if (ball_hit_count == 2)
                     {
                         State = Player_State.Dead;
