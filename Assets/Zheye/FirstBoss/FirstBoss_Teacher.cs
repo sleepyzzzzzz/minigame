@@ -213,7 +213,6 @@ public class FirstBoss_Teacher : MonoBehaviour {
     //单个粉笔攻击（随机大小）
     private void RandomSingleChalkAttack()
     {
-        Debug.Log("SingleChalk");
         //生成粉笔并朝向主角
         UnityEngine.Transform go = Instantiate(ChalkPrefab,transform.position,Quaternion.LookRotation(PlayerTransfrom.position-transform.position)).transform;
         go.Rotate(0, -90, 0);
@@ -245,7 +244,6 @@ public class FirstBoss_Teacher : MonoBehaviour {
     //小粉笔三连击
     private IEnumerator ThreeChalkAttack()
     {
-        Debug.Log("ThreeChalk");
         for (int i = 0; i <= 2; i++)
         {
             UnityEngine.Transform go = Instantiate(ChalkPrefab, transform.position, Quaternion.LookRotation(PlayerTransfrom.position - transform.position)).transform;
@@ -262,7 +260,6 @@ public class FirstBoss_Teacher : MonoBehaviour {
     //练习册攻击
     private void BookAttack()
     {
-        Debug.Log("Book");
         Rigidbody2D go = Instantiate(BookPrefab, transform.position+Vector3.up*1.5f, Quaternion.identity).GetComponent<Rigidbody2D>();
         //根据角度和力量将物体抛掷出去
         int xDir = PlayerTransfrom.position.x > transform.position.x?1:-1;

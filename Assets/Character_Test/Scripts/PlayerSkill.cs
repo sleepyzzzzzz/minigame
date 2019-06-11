@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Controller;
 using TransferManage;
+using UnityEngine.UI;
 
 public enum Level
 {
@@ -25,11 +26,29 @@ namespace Placer
         private bool throwing;
         private bool withdraw;
 
-        Level level = Level.Level1;
+        public static Level level = Level.Level1;
+
+        //放置传送门冷却相关，冷却时间内不能放置
+        private static float ColdTime = 10f; 
+        private float BlueColdTimer = 0;
+        private bool BlueisCold = false;
+        private float RedColdTimer = 0;
+        private bool RedisCold = false;
+        public GameObject RedColdImg;
+        private Text RedColdText;
+        public GameObject BlueColdImg;
+        private Text BlueColdText;
+
+        public void SetRedCold() { RedisCold = true;RedColdImg.SetActive(true); }
+        public void SetBlueCold() { BlueisCold = true;BlueColdImg.SetActive(true); }
+
 
         private void Start()
         {
             player_animator = GetComponent<Animator>();
+
+            if(RedColdImg!=null)RedColdText = RedColdImg.transform.Find("Text").GetComponent<Text>();
+            if(BlueColdImg!=null)BlueColdText = BlueColdImg.transform.Find("Text").GetComponent<Text>();
         }
 
         public void FixedUpdate()
@@ -50,7 +69,33 @@ namespace Placer
 
         private void BasicSkill()
         {
-            if (Input.GetMouseButtonDown(0) && !bdoor_placed)
+            //冷却相关
+            if(RedisCold)
+            {
+                RedColdTimer += Time.fixedDeltaTime;
+                RedColdText.text = ((int)(10-RedColdTimer)).ToString();
+                if(RedColdTimer>ColdTime)
+                {
+                    RedColdTimer = 0;
+                    RedisCold = false;
+                    RedColdImg.SetActive(false);
+                    if(rdoor_placed)rdoor_placed = false;
+                }
+            }
+            if(BlueisCold)
+            {
+                BlueColdTimer += Time.fixedDeltaTime;
+                BlueColdText.text = ((int)(10-BlueColdTimer)).ToString();
+                if (BlueColdTimer > ColdTime)
+                {
+                    BlueColdTimer = 0;
+                    BlueisCold = false;
+                    BlueColdImg.SetActive(false);
+                    if(bdoor_placed)bdoor_placed = false;
+                }
+            }
+
+            if (Input.GetMouseButtonDown(0) && !bdoor_placed&&!BlueisCold)
             {
                 bdoor_placed = true;
                 placeing = true;
@@ -81,7 +126,7 @@ namespace Placer
 
         private void Level1Skill()
         {
-            if (Input.GetMouseButtonDown(1) && !rdoor_placed)
+            if (Input.GetMouseButtonDown(1) && !rdoor_placed&&!RedisCold)
             {
                 rdoor_placed = true;
                 placeing = true;
