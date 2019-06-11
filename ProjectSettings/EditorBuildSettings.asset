@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Test.unity
     guid: 6a8280471311649af944ba11d0c41f6b
   - enabled: 1
+    path: "Assets/LX/scene/Level1\u2014boss.unity"
+    guid: a06b456f5fa1a614ebd89e22aef33500
+  - enabled: 1
     path: Assets/LX/scene/Level2.unity
     guid: db8ceca438e5ee64d918a7e81f4a3ae9
   - enabled: 1
