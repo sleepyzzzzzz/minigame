@@ -23,11 +23,7 @@ namespace Controller
         private static Animator player_animator;
         private float speed = 4.5f;
         private float crouch_speed = 1.5f;
-<<<<<<< HEAD
-        private float JumpForce = 150f;
-=======
         public float JumpForce = 90f;
->>>>>>> 2dd1b828ad3b61ee11bd2f22dfd968713afe505e
         public static bool facing_right = true;
         public static bool facing_left = false;
 
