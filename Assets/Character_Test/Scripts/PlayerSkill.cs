@@ -47,8 +47,8 @@ namespace Placer
         {
             player_animator = GetComponent<Animator>();
 
-            RedColdText = RedColdImg.transform.Find("Text").GetComponent<Text>();
-            BlueColdText = BlueColdImg.transform.Find("Text").GetComponent<Text>();
+            if(RedColdImg!=null)RedColdText = RedColdImg.transform.Find("Text").GetComponent<Text>();
+            if(BlueColdImg!=null)BlueColdText = BlueColdImg.transform.Find("Text").GetComponent<Text>();
         }
 
         public void FixedUpdate()
