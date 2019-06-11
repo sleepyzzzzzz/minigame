@@ -9,8 +9,6 @@ TagManager:
   - SmallChalk
   - ground
   - Book
-  - acorns
-  - basketball
   layers:
   - Default
   - TransparentFX

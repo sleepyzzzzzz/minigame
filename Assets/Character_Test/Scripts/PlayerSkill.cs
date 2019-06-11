@@ -26,7 +26,7 @@ namespace Placer
         private bool throwing;
         private bool withdraw;
 
-        public static Level level = Level.Level1;
+        Level level = Level.Level1;
 
         //放置传送门冷却相关，冷却时间内不能放置
         private static float ColdTime = 10f; 

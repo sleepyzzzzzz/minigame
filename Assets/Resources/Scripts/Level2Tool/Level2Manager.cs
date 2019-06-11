@@ -100,20 +100,21 @@ namespace LevelManage
                 default:
                     break;
             }
+                
         }
         /// <summary>根据传入足球类型和坐标生成足球
         /// 
         /// </summary>
         /// <param name="type"></param>
         /// <param name="transform"></param>
-        //public void InstalizeBall(BallType type,Vector3 transform)
-        //{
+        public void InstalizeBall(BallType type,Vector3 transform)
+        {
             
-        //    GameObject Ball = Instantiate(Resources.Load(toolpath + type.ToString()), transform, Quaternion.identity) as GameObject;
-        //    Ball.GetComponent<Ball>().ballType = type;
+            GameObject Ball = Instantiate(Resources.Load(toolpath + type.ToString()), transform, Quaternion.identity) as GameObject;
+            Ball.GetComponent<Ball>().ballType = type;
 
             
-        //}
+        }
 
 
     }

@@ -116,11 +116,6 @@ public class SecondBoss_Classmate : MonoBehaviour
                 }
                 if (WaitAttackTimer >= AttackFrequency)
                 {
-                    if (AnimState.name != AttackStr)
-                    {
-                        AnimState = AnimComponent.animation.Play(AttackStr);
-                        AnimState.timeScale = 2f;
-                    }
                     switch (Random.Range(0, 2))
                     {
                         case 0:
@@ -152,18 +147,10 @@ public class SecondBoss_Classmate : MonoBehaviour
                 if (Mathf.Abs(transform.position.x - MoveTargetX) < 0.1f)
                 {
                     AnimComponent.armature.flipX = PlayerTransfrom.position.x > transform.position.x ? true : false;
-                    if (AnimState.name != DefendStr)
-                    {
-                        AnimState = AnimComponent.animation.Play(DefendStr);
-                    }
                 }
                 else
                 {
                     Moving(GreenZone_speed);
-                    if (AnimState.name != WalkStr)
-                    {
-                        AnimState = AnimComponent.animation.Play(WalkStr);
-                    }
                 }
                 break;
         }
