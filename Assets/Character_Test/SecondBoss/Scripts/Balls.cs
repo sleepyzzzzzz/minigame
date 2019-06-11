@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Balls : MonoBehaviour
 {
-    public float Speed = 5;
+    public float Speed;
 
     void Update()
     {
@@ -13,7 +13,6 @@ public class Balls : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Ball Collision:" + collision.collider.tag);
         switch (collision.collider.tag)
         {
             case "Player":

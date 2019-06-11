@@ -10,12 +10,12 @@ namespace Trampoline
     /// </summary>
     public enum TramType
     {
-        Player,
+        //Player,
+        basketball
     }
+
     public class Trampoline : MonoBehaviour
     {
-       
-
         public void OnCollisionEnter2D(Collision2D collision)
         {
             if (CheckTag(collision.gameObject.tag))
