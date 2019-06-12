@@ -28,18 +28,20 @@ namespace CZF
         private Image[] CGImages;
         public string[] CGTexts=new string[4] { "这是第一张图片", "这是第二张图片", "这是第三张图片", "这是第四张图片" };
 
-        private float ImageShowTime;
         public float ImageFadeTime=1f;
 
         public float WordDivide = 70;//字间距
         public float SingleWordShowTime = 0.2f;//每字显现间隔时间
+        public float PhraseShowTime = 1f;
         public float TextFadeTime = 2f;//一行字消失时间
         public float WordStartShowY = 20f;//字开始出现的高度
         public float SwitchLineTime = 0.8f;//每行字切换间隔时间
         public float TextExistTime = 1f;//每行字停留时间
-        public GameObject TextPrefab;
-        Vector2 StartPos = Vector2.zero;
-        List<Text> texts = new List<Text>();
+
+        public Text ShowText;
+
+        //Vector2 StartPos = Vector2.zero;
+        //List<Text> texts = new List<Text>();
 
         private Image mask2;
 
@@ -51,8 +53,8 @@ namespace CZF
             mask = transform.Find("mask").GetComponent<Image>();
             mask2 = transform.Find("mask2").GetComponent<Image>();
             CGImages = transform.Find("CGAnim").GetComponentsInChildren<Image>();
-            StartPos = transform.Find("CGAnim").Find("TextAnim").GetComponent<RectTransform>().anchoredPosition;
-            InitText();
+            //StartPos = transform.Find("CGAnim").Find("TextAnim").GetComponent<RectTransform>().anchoredPosition;
+            //InitText();
         }
 
 
@@ -83,29 +85,28 @@ namespace CZF
         {
             for (int i = 0; i < CGImages.Length; i++)
             {
-                ImageShowTime = SingleWordShowTime * CGTexts[i].Length;
-                StartCoroutine(ImageAlphaAnim(CGImages[i], 1, ImageShowTime));
-                yield return new WaitForSeconds(ImageShowTime+TextExistTime+TextFadeTime+SwitchLineTime);   
+                StartCoroutine(ImageAlphaAnim(CGImages[i], 1, PhraseShowTime));
+                yield return new WaitForSeconds(PhraseShowTime+TextExistTime+TextFadeTime+SwitchLineTime);   
             }
             StartCoroutine(ImageAlphaAnim(mask2, 1, ImageFadeTime));
         }
 
-        //初始化文字组件
-        void InitText()
-        {
-            int maxL = 0;
-            foreach (var item in CGTexts)
-            {
-                if (item.Length > maxL)
-                    maxL = item.Length;
-            }
-            for (int i = 0; i < maxL; i++)
-            {
-                GameObject go = Instantiate(TextPrefab, transform);
-                go.GetComponent<RectTransform>().anchoredPosition = StartPos + Vector2.right * WordDivide * i;
-                texts.Add(go.GetComponent<Text>());
-            }
-        }
+        ////初始化文字组件
+        //void InitText()
+        //{
+        //    int maxL = 0;
+        //    foreach (var item in CGTexts)
+        //    {
+        //        if (item.Length > maxL)
+        //            maxL = item.Length;
+        //    }
+        //    for (int i = 0; i < maxL; i++)
+        //    {
+        //        GameObject go = Instantiate(TextPrefab, transform);
+        //        go.GetComponent<RectTransform>().anchoredPosition = StartPos + Vector2.right * WordDivide * i;
+        //        texts.Add(go.GetComponent<Text>());
+        //    }
+        //}
 
 
         IEnumerator ImageAlphaAnim(Image image,float EndValue,float time)
@@ -127,25 +128,31 @@ namespace CZF
         {
             for (int i = 0; i < CGTexts.Length; i++)
             {
-                string str = CGTexts[i];
-                for (int j = 0; j < str.Length; j++)
-                {
-                    texts[j].text = str[j].ToString();
-                    texts[j].color = new Color(1, 1, 1, 0);
-                    RectTransform rect = texts[j].GetComponent<RectTransform>();
-                    rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, WordStartShowY);
-                    StartCoroutine(TextAlphaAnim(texts[j], 1, SingleWordShowTime));
-                    StartCoroutine(SingleWordMoveDown(rect, StartPos.y, SingleWordShowTime));
-                    yield return new WaitForSeconds(SingleWordShowTime);
-                }
-                yield return new WaitForSeconds(TextExistTime);
-                for (int j = 0; j < str.Length; j++)
-                {
-                    StartCoroutine(TextAlphaAnim(texts[j], 0, TextFadeTime));
-                }
-                yield return new WaitForSeconds(TextFadeTime);
-                yield return new WaitForSeconds(SwitchLineTime);
+                ShowText.text = CGTexts[i];
+                StartCoroutine(TextAlphaAnim(ShowText, 1, PhraseShowTime));
+                yield return new WaitForSeconds(PhraseShowTime + TextExistTime);
+                StartCoroutine(TextAlphaAnim(ShowText, 0, TextFadeTime));
+                yield return new WaitForSeconds(TextFadeTime + SwitchLineTime);   
+                //string str = CGTexts[i];
+                //for (int j = 0; j < str.Length; j++)
+                //{
+                //    texts[j].text = str[j].ToString();
+                //    texts[j].color = new Color(1, 1, 1, 0);
+                //    RectTransform rect = texts[j].GetComponent<RectTransform>();
+                //    rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, WordStartShowY);
+                //    StartCoroutine(TextAlphaAnim(texts[j], 1, SingleWordShowTime));
+                //    StartCoroutine(SingleWordMoveDown(rect, StartPos.y, SingleWordShowTime));
+                //    yield return new WaitForSeconds(SingleWordShowTime);
+                //}
+                //yield return new WaitForSeconds(TextExistTime);
+                //for (int j = 0; j < str.Length; j++)
+                //{
+                //    StartCoroutine(TextAlphaAnim(texts[j], 0, TextFadeTime));
+                //}
+                //yield return new WaitForSeconds(TextFadeTime);
+                //yield return new WaitForSeconds(SwitchLineTime);
             }
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Main");
         }
 
         //字符移动动画

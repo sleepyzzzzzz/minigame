@@ -30,6 +30,8 @@ public class Level1Manager : MonoBehaviour
     public GameObject TipsUI;
 
     public GameObject[] hpImages;
+
+    private bool ListenAnyKey = false;
     
     private void Awake()
     {
@@ -43,6 +45,13 @@ public class Level1Manager : MonoBehaviour
         TipsUI.GetComponentInChildren<Button>().onClick.AddListener(() => { Destroy(TipsUI); Time.timeScale = 1; });
     }
 
+    private void Update()
+    {
+        if(ListenAnyKey&&Input.anyKeyDown)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Level2");
+        }
+    }
 
     public void PlayerGetHurt()
     {
@@ -74,6 +83,7 @@ public class Level1Manager : MonoBehaviour
     {
         StartCoroutine(ImageAlphaAnim(mask, 1, 1.5f));
         WinUI.SetActive(true);
+        ListenAnyKey = true;
     }
 
     IEnumerator ImageAlphaAnim(Image image, float EndValue, float time)
