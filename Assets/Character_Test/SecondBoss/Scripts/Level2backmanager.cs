@@ -9,11 +9,12 @@ public class Level2backmanager : MonoBehaviour
     public float acornsfallspeed;
     public float acornsfallfrequency;
     public float basketballfallspeed;
-    private bool round_over = false;
-    private float WaitFall = 5f;
+    public float WaitFall = 3f;
     private float WaitFallTimer = 0f;
-    private float WaitLoad = 5f;
+    public float WaitLoad = 3f;
     private float WaitLoadTimer = 0f;
+    private bool round_over;
+    private bool load = false;
     [Space]
     public Transform player;
     public float Zone_xmin;
@@ -29,19 +30,24 @@ public class Level2backmanager : MonoBehaviour
     void Start()
     {
         LoadAcorns();
+        load = true;
+        round_over = false;
         Basketball = GameObject.FindGameObjectWithTag("basketball");
     }
 
     // Update is called once per frame
     void Update()
     {
-        WaitFallTimer += Time.deltaTime;
-        if (WaitFallTimer >= WaitFall)
+        if (load && !round_over)
         {
-            StartCoroutine(AcornsFall());
-            WaitFallTimer = 0f;
+            WaitFallTimer += Time.deltaTime;
+            if (WaitFallTimer >= WaitFall)
+            {
+                StartCoroutine(AcornsFall());
+                WaitFallTimer = 0f;
+            }
         }
-        if (round_over)
+        else
         {
             WaitLoadTimer += Time.deltaTime;
             if (WaitLoadTimer >= WaitLoad)
@@ -49,24 +55,26 @@ public class Level2backmanager : MonoBehaviour
                 LoadAcorns();
                 WaitLoadTimer = 0f;
                 round_over = false;
+                load = true;
             }
         }
         BasketBallFall();
     }
 
-
     private IEnumerator AcornsFall()
     {
-        for (int j = 0; j < acorn.Length; j++)
+        for (int i = 0; i < acorn.Length; i++)
         {
-            acorn[j].Speed = acornsfallspeed;
-            acorn[j].falling = true;
-            yield return new WaitForSeconds(acornsfallfrequency);
-            if (j == acorn.Length - 1 && acorn[j].destroy)
+            if (i == (acorn.Length - 1) && acorn[i].destroy)
             {
                 round_over = true;
-                acorn = null;
-                acorn = new ACORNS[9];
+                load = false;
+            }
+            if (!acorn[i].destroy)
+            {
+                acorn[i].Speed = acornsfallspeed;
+                acorn[i].falling = true;
+                yield return new WaitForSeconds(acornsfallfrequency);
             }
         }
     }

@@ -14,6 +14,7 @@ namespace BASKETBALL_Manager
             if (collision.transform.tag == "ground")
             {
                 collision_num++;
+                Debug.Log(collision_num);
                 if (collision_num == 3)
                 {
                     Destroy(gameObject);
