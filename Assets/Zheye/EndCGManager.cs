@@ -21,20 +21,14 @@ namespace CZF
         public float TextExistTime = 1f;//每行字停留时间
 
         public Text ShowText;
-
-
         private Image mask;
 
         void Start()
         {
             mask = transform.Find("mask").GetComponent<Image>();
             CGImages = transform.Find("CGAnim").GetComponentsInChildren<Image>();
-        }
-
-
-        void Update()
-        {
-
+            StartCoroutine(ShowStartCG());
+            StartCoroutine(ShowCGText());
         }
 
 

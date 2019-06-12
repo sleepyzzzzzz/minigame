@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/LX/scene/Level3-boss.unity
     guid: 9af2cd84916e87e489e09038e54a4fcd
+  - enabled: 1
+    path: Assets/LX/scene/EndCG.unity
+    guid: 6dba5cd4d7ca79049bdb6ad26f7e9594
   m_configObjects: {}
