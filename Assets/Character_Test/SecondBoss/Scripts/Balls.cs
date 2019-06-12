@@ -9,6 +9,7 @@ public class Balls : MonoBehaviour
     void Update()
     {
         transform.Translate(Speed * Time.deltaTime, 0, 0);
+        Destroy(gameObject, 8f);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -19,7 +20,7 @@ public class Balls : MonoBehaviour
                 Destroy(gameObject);
                 break;
             case "ground":
-                Destroy(gameObject);
+                Destroy(gameObject, 0.1f);
                 break;
             case "BluePortal":
                 if(this.tag == "BlueBall")

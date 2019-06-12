@@ -11,6 +11,9 @@ TagManager:
   - Book
   - acorns
   - basketball
+  - BlackBall
+  - BlueBall
+  - TechBall
   layers:
   - Default
   - TransparentFX
