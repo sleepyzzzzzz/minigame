@@ -32,7 +32,7 @@ namespace LevelManage
         /// <summary>玩家射门成功的次数
         /// 
         /// </summary>
-        public static int ShootSuccessNum = 0;
+        public static int ShootSuccessNum = 2;
         /// <summary>第二关道具（除了传送门）的prefab资源路径
         /// 
         /// </summary>
@@ -63,14 +63,13 @@ namespace LevelManage
         /// </summary>
         public event Action ShootFailed;
 
+        public static bool win = false;
         public Image mask;
         public GameObject WinUI;
 
         private void Awake()
         {
             InstalizeBall(BallType.TechBall, new Vector3(4.88f, 13.85f, -1f));
-            ShootSuccess = restart_success_kick;
-            ShootFailed = restart_fail_kick;
         }
 
         private void FixedUpdate()
@@ -137,17 +136,6 @@ namespace LevelManage
             Ball.GetComponent<Ball>().ballType = type;
         }
 
-        private void restart_success_kick()
-        {
-            ChargeNum = 0;
-            ShootSuccessNum++;
-        }
-
-        private void restart_fail_kick()
-        {
-            ChargeNum = 0;
-        }
-
         private void Level2LoseAsync()
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("Level2-boss");
@@ -156,6 +144,7 @@ namespace LevelManage
 
         public void Level2Win()
         {
+            win = true;
             StartCoroutine(ImageAlphaAnim(mask, 1, 1.5f));
             WinUI.SetActive(true);
         }

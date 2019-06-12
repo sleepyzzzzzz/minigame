@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using LevelManage;
 
 namespace Clock
 {
@@ -19,6 +20,11 @@ namespace Clock
             StartCoroutine(Counting());
         }
 
+        private void Update()
+        {
+            StopTiming();
+        }
+
         private IEnumerator Counting()
         {
             while (level_time > 0)
@@ -29,6 +35,15 @@ namespace Clock
             }
             Debug.Log("over");
             over = true;
+        }
+
+        public void StopTiming()
+        {
+            if (Level2Manager.win)
+            {
+                over = true;
+                StopCoroutine(Counting());
+            }
         }
     }
 }
