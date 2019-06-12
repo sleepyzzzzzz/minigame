@@ -173,7 +173,6 @@ namespace Controller
 
         public void Dead_State(string tag)
         {
-            Debug.Log(ball_hit_count);
             switch (tag)
             {
                 case "SmallChalk":

@@ -145,8 +145,10 @@ namespace Placer
             if (Input.GetMouseButtonDown(1) && !rdoor_placed)
             {
                 Vector3 place_pos = this.transform.position;
-                place_pos.x += 2.0f * (PlayerController.facing_right ? 1 : -1);
+                place_pos.x += 3.0f * (PlayerController.facing_right ? 1 : -1);
+                place_pos.y -= 0.5f;
                 red = TransferManager.instalize(PortalType.Red, place_pos);
+                red.transform.localScale = new Vector3(1, 1, 1);
                 rdoor_placed = true;
                 placeing = true;
                 throwing = true;
