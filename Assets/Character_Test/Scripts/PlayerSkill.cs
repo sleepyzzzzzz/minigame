@@ -29,7 +29,7 @@ namespace Placer
         public static Level level = Level.Level1;
 
         //放置传送门冷却相关，冷却时间内不能放置
-        private static float ColdTime = 10f; 
+        private static float ColdTime = 5f; 
         private float BlueColdTimer = 0;
         private bool BlueisCold = false;
         private float RedColdTimer = 0;
@@ -73,7 +73,7 @@ namespace Placer
             if(RedisCold)
             {
                 RedColdTimer += Time.fixedDeltaTime;
-                RedColdText.text = ((int)(10-RedColdTimer)).ToString();
+                RedColdText.text = ((int)(ColdTime-RedColdTimer)).ToString();
                 if(RedColdTimer>ColdTime)
                 {
                     RedColdTimer = 0;
@@ -85,7 +85,7 @@ namespace Placer
             if(BlueisCold)
             {
                 BlueColdTimer += Time.fixedDeltaTime;
-                BlueColdText.text = ((int)(10-BlueColdTimer)).ToString();
+                BlueColdText.text = ((int)(ColdTime-BlueColdTimer)).ToString();
                 if (BlueColdTimer > ColdTime)
                 {
                     BlueColdTimer = 0;
