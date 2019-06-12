@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using LevelManage;
 
 namespace Clock
 {
@@ -16,7 +17,12 @@ namespace Clock
         void Start()
         {
             TimeText.text = string.Format("剩余时间: {0:D1}:{1:D2}", (int)level_time / 60, (int)level_time % 60);
-            StartCoroutine(Counting());
+            StartCoroutine("Counting");
+        }
+
+        private void Update()
+        {
+            StopTiming();
         }
 
         private IEnumerator Counting()
@@ -29,6 +35,15 @@ namespace Clock
             }
             Debug.Log("over");
             over = true;
+        }
+
+        public void StopTiming()
+        {
+            if (Level2Manager.win)
+            {
+                over = true;
+                StopCoroutine("Counting");
+            }
         }
     }
 }
