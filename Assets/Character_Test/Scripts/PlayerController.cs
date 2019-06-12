@@ -180,6 +180,7 @@ namespace Controller
                     if (first_chalk_hit_count == 3)
                     {
                         State = Player_State.Dead;
+                        if (facing_left) { facing_right = true;facing_left = false; }
                     }
                     break;
                 case "BlueBall":

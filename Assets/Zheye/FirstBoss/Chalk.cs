@@ -11,7 +11,6 @@ public class Chalk : MonoBehaviour {
     
     void OnCollisionEnter2D(Collision2D coll)
     {
-        Debug.Log("Chalk Collision:"+coll.collider.tag);
         switch(coll.collider.tag)
         {
             case "Player":
