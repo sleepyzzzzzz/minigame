@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1840,10 +1840,10 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0.08
   m_Points:
-  - {x: -22.09314, y: -6.109393}
-  - {x: -22.093143, y: 3.9001374}
-  - {x: 16.13671, y: 3.900137}
-  - {x: 16.136711, y: -6.1004257}
+  - {x: -22.189224, y: -6.109393}
+  - {x: -22.237267, y: 3.9962206}
+  - {x: 16.243439, y: 4.006866}
+  - {x: 16.24344, y: -6.1004257}
 --- !u!1 &1521956828 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3923465796345988810, guid: 1130872153ea99f4a8b3b9638d40ed9f,
