@@ -179,10 +179,12 @@ public class ThirdBoss_Girl : MonoBehaviour
         rg.AddForce(vec, ForceMode2D.Force);
         if (Random.value > 0.5f)//随机纸飞机大小
         {
+            go.GetComponent<PaperPlane>().isBigPlane = false;
             go.localScale *= SmallSize;
         }
         else
         {
+            go.GetComponent<PaperPlane>().isBigPlane = true;
             go.localScale *= BigSize;
         }
     }

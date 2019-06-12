@@ -41,9 +41,14 @@ namespace portal
                     Destroy(gameObject);
                 }
             }
-            if(collision.collider.tag=="Book"&&this.tag=="BluePortal")
+            else if(collision.collider.tag=="Book"&&this.tag=="BluePortal")
             {
                 if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Level1—boss") Level1Manager.Instance.GetBook();
+            }
+            else if(collision.collider.tag=="Plane")
+            {
+                PaperPlane pp = collision.collider.GetComponent<PaperPlane>();
+                if(pp.isBigPlane)Level3Manager.Instance.GetPlane();
             }
 
             switch (type)

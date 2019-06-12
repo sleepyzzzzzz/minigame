@@ -29,6 +29,7 @@ namespace Controller
 
         private int first_chalk_hit_count = 0;
         private int ball_hit_count = 0;
+        private int plane_hit_count = 0;
 
         private bool walk;
         private bool hurt;
@@ -147,6 +148,10 @@ namespace Controller
                     ball_hit_count++;
                     hurt = true;
                     break;
+                case "Plane":
+                    plane_hit_count++;
+                    hurt = true;
+                    break;
             }
             Hurt_Anim();
             Dead_State(collision.collider.tag);
@@ -191,6 +196,13 @@ namespace Controller
                     if (ball_hit_count == 2)
                     {
                         State = Player_State.Dead;
+                    }
+                    break;
+                case "Plane":
+                    if(plane_hit_count==3)
+                    {
+                        State = Player_State.Dead;
+                        if (facing_left) { facing_right = true; facing_left = false; }
                     }
                     break;
             }
