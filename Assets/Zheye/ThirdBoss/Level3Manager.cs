@@ -27,7 +27,7 @@ public class Level3Manager : MonoBehaviour
 
     public Image mask;
     public GameObject WinUI;
-
+    public GameObject TipsUI;
     public GameObject[] hpImages;
 
     private void Awake()
@@ -35,7 +35,12 @@ public class Level3Manager : MonoBehaviour
         _instance = this;
     }
 
-
+    private void Start()
+    {
+        TipsUI.SetActive(true);
+        Time.timeScale = 0;
+        TipsUI.GetComponentInChildren<Button>().onClick.AddListener(() => { Destroy(TipsUI); Time.timeScale = 1; });
+    }
 
     public void PlayerGetHurt()
     {
@@ -59,12 +64,13 @@ public class Level3Manager : MonoBehaviour
 
     public void Level3LoseAsync()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Level3—boss");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Level3-boss");
         PlayerController.State = Player_State.Alive;
     }
 
     public void Level3Win()
     {
+        Time.timeScale = 0;
         StartCoroutine(ImageAlphaAnim(mask, 1, 1.5f));
         WinUI.SetActive(true);
     }

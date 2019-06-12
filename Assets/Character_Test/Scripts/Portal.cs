@@ -48,7 +48,22 @@ namespace portal
             else if(collision.collider.tag=="Plane")
             {
                 PaperPlane pp = collision.collider.GetComponent<PaperPlane>();
-                if(pp.isBigPlane)Level3Manager.Instance.GetPlane();
+                if (pp.isBigPlane)
+                {
+                    if(this.tag=="RedPortal") Level3Manager.Instance.GetPlane();
+                } 
+                else
+                {
+                    if (this.tag == "BluePortal")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSkill>().SetBlueCold();
+                    }
+                    else if (this.tag == "RedPortal")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSkill>().SetRedCold();
+                    }
+                    Destroy(gameObject);
+                }
             }
 
             switch (type)

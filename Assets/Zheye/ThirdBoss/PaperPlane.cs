@@ -10,9 +10,12 @@ public class PaperPlane : MonoBehaviour
         switch (collision.collider.tag)
         {
             case "Player":
-                if (!isBigPlane) Level3Manager.Instance.PlayerGetHurt();
+            if (!isBigPlane) Level3Manager.Instance.PlayerGetHurt();
             Destroy(gameObject); break;
             case "ground":Destroy(gameObject); break;
+            case "BluePortal":
+            case "RedPortal":
+            Destroy(gameObject); break;
             default:break;
         }
 

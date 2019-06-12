@@ -149,7 +149,7 @@ namespace Controller
                     hurt = true;
                     break;
                 case "Plane":
-                    plane_hit_count++;
+                    if(!collision.collider.GetComponent<PaperPlane>().isBigPlane) plane_hit_count++;
                     hurt = true;
                     break;
             }
