@@ -55,7 +55,6 @@ namespace TransferManage
         {
             Debug.Log(type + "门初始化");
             GameObject door = Instantiate(Resources.Load(doorpath + "/" + type.ToString() + "DoorPrefab"), transform, Quaternion.identity) as GameObject;
-            //door.transform.localScale = new Vector3(0.5f, 0.5f, 0);
             return door;
         }
     }

@@ -789,7 +789,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 443755926}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 30.43, y: 10.4, z: -2.8}
+  m_LocalPosition: {x: 26.97, y: 10.98, z: -2.8}
   m_LocalScale: {x: 0.17554338, y: 0.17554338, z: 0.17554338}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1148,7 +1148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1084020044}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.6, y: 11.3, z: -7.02}
+  m_LocalPosition: {x: -0.7, y: 11.3, z: -7.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1453,10 +1453,10 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0.08
   m_Points:
-  - {x: 47.961517, y: -0.8682134}
-  - {x: 47.960594, y: 17.116413}
-  - {x: -43.49818, y: 17.11641}
-  - {x: -43.498184, y: -0.8817079}
+  - {x: 40.912605, y: 3.0140026}
+  - {x: 40.89273, y: 13.23555}
+  - {x: -10.128311, y: 13.228476}
+  - {x: -10.1186905, y: 3.00646}
 --- !u!4 &1407179361
 Transform:
   m_ObjectHideFlags: 0
@@ -1528,9 +1528,9 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0.1
   m_Points:
-  - {x: -21.378117, y: 12.097083}
-  - {x: -32.641453, y: 12.659881}
-  - {x: -32.234703, y: 1.6873562}
+  - {x: 2.288454, y: 10.376453}
+  - {x: -3.9702563, y: 10.786889}
+  - {x: -3.8516612, y: 4.4248056}
 --- !u!1 &1542436467
 GameObject:
   m_ObjectHideFlags: 0
@@ -1638,7 +1638,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1653770740}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.53, y: 10.87, z: 23.91}
+  m_LocalPosition: {x: 9.48, y: 10.87, z: 23.91}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
   m_Father: {fileID: 1407179361}
@@ -1736,7 +1736,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1653770740}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4af193b726104c6994f7718206402b0, type: 3}
   m_Name: 
