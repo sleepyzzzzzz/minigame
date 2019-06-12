@@ -63,6 +63,9 @@ public class FirstBoss_Teacher : MonoBehaviour {
     private float ThrowTimer = 0;
     private bool isThrowing=false;
 
+    public AudioClip ThrowChalkAudio;
+    public AudioClip ThrowBookAudio;
+
 
     void Start () {
         PlayerTransfrom = GameObject.FindGameObjectWithTag(GlobalTags.Player).transform;
@@ -239,6 +242,7 @@ public class FirstBoss_Teacher : MonoBehaviour {
             go.localScale *= SmallChalkSize;
             chalk.Speed = SmallChalkSpeed;
         }
+        AudioSource.PlayClipAtPoint(ThrowChalkAudio, transform.position);
     }
 
     //小粉笔三连击
@@ -246,6 +250,7 @@ public class FirstBoss_Teacher : MonoBehaviour {
     {
         for (int i = 0; i <= 2; i++)
         {
+            AudioSource.PlayClipAtPoint(ThrowChalkAudio, transform.position);
             UnityEngine.Transform go = Instantiate(ChalkPrefab, transform.position, Quaternion.LookRotation(PlayerTransfrom.position - transform.position)).transform;
             go.Rotate(0, -90, 0);
             go.SetParent(transform);
@@ -260,6 +265,7 @@ public class FirstBoss_Teacher : MonoBehaviour {
     //练习册攻击
     private void BookAttack()
     {
+        AudioSource.PlayClipAtPoint(ThrowBookAudio, transform.position);
         Rigidbody2D go = Instantiate(BookPrefab, transform.position+Vector3.up*1.5f, Quaternion.identity).GetComponent<Rigidbody2D>();
         //根据角度和力量将物体抛掷出去
         int xDir = PlayerTransfrom.position.x > transform.position.x?1:-1;

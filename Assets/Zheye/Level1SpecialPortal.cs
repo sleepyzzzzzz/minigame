@@ -9,6 +9,7 @@ public class Level1SpecialPortal : MonoBehaviour
     public bool isRed;
     private KeyCode ListenKey;
     private Animator anim;
+    public AudioClip PortalAudio;
 
     private void Start()
     {
@@ -22,6 +23,7 @@ public class Level1SpecialPortal : MonoBehaviour
         {
             anim.SetTrigger("Go");
             GetComponent<Collider2D>().enabled = false;
+            AudioSource.PlayClipAtPoint(PortalAudio, transform.position);
         }
     }
 

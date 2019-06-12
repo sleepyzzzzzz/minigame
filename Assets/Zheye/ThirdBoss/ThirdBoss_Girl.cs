@@ -48,6 +48,8 @@ public class ThirdBoss_Girl : MonoBehaviour
     private float ThrowTimer = 0;
     private bool isThrowing = false;
 
+    private AudioSource ThrowAudio;
+
 
     void Start()
     {
@@ -55,6 +57,7 @@ public class ThirdBoss_Girl : MonoBehaviour
         AnimComponent = GetComponent<UnityArmatureComponent>();
         GotoNextTurn();
         AnimState = AnimComponent.animation.Play(IdleStr);
+        ThrowAudio = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -168,6 +171,7 @@ public class ThirdBoss_Girl : MonoBehaviour
     //单个纸飞机攻击（随机大小）
     private void Attack()
     {
+        ThrowAudio.Play();
         //生成纸飞机并朝向主角
         UnityEngine.Transform go = Instantiate(PaperPlanePrefab, transform.position, Quaternion.LookRotation(PlayerTransfrom.position - transform.position)).transform;
         go.Rotate(0, -90, 0);

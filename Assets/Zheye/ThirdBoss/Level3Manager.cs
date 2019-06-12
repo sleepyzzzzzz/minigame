@@ -30,6 +30,9 @@ public class Level3Manager : MonoBehaviour
     public GameObject TipsUI;
     public GameObject[] hpImages;
 
+    private bool ListenKey = false;
+
+
     private void Awake()
     {
         _instance = this;
@@ -40,6 +43,14 @@ public class Level3Manager : MonoBehaviour
         TipsUI.SetActive(true);
         Time.timeScale = 0;
         TipsUI.GetComponentInChildren<Button>().onClick.AddListener(() => { Destroy(TipsUI); Time.timeScale = 1; });
+    }
+
+    private void Update()
+    {
+        if(ListenKey&&Input.anyKeyDown)
+        {
+            LoadEndCG();
+        }
     }
 
     public void PlayerGetHurt()
@@ -73,6 +84,12 @@ public class Level3Manager : MonoBehaviour
         Time.timeScale = 0;
         StartCoroutine(ImageAlphaAnim(mask, 1, 1.5f));
         WinUI.SetActive(true);
+        ListenKey = true;
+    }
+
+    public void LoadEndCG()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("EndCG");
     }
 
     IEnumerator ImageAlphaAnim(Image image, float EndValue, float time)

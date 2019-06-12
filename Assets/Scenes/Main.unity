@@ -2423,7 +2423,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f314f4e558db8e042bbb9e1e3744e214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextSceneName: Level1-boss
+  NextSceneName: "Level1\u2014boss"
+  LevelEndClip: {fileID: 8300000, guid: 2381a3decf34ccf4ab17c5b30ec01819, type: 3}
 --- !u!1 &1096640767
 GameObject:
   m_ObjectHideFlags: 0
@@ -3800,6 +3801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRed: 0
+  PortalAudio: {fileID: 8300000, guid: 2a78d0eda56f4764ba8ccd3e26249486, type: 3}
 --- !u!1 &1904670319
 GameObject:
   m_ObjectHideFlags: 0
@@ -4890,5 +4892,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2609138845530536565, guid: 2a50bb3082bf66648bb29eeb33e3ffec,
+        type: 3}
+      propertyPath: PortalAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 2a78d0eda56f4764ba8ccd3e26249486, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a50bb3082bf66648bb29eeb33e3ffec, type: 3}
