@@ -178,9 +178,10 @@ namespace Controller
 
         private void JumpIntoTech()
         {
-            this.transform.GetComponent<Rigidbody2D>().isKinematic = true;
+            pre_pos = this.transform.position;
             Vector3 pos = GameObject.FindGameObjectWithTag("TechBall").transform.position;
-            this.transform.position = new Vector3(pos.x + 1.9f, pos.y, pos.z);
+            this.transform.position = new Vector3(pos.x + 1.9f, pos.y - 0.3f, this.transform.position.z);
+            this.transform.GetComponent<Rigidbody2D>().isKinematic = true;
         }
 
         private void BackToBossGame()

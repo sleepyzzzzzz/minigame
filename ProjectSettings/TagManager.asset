@@ -15,6 +15,7 @@ TagManager:
   - BlueBall
   - TechBall
   - Plane
+  - Goal
   layers:
   - Default
   - TransparentFX
