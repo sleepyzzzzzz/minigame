@@ -14,15 +14,11 @@ namespace BASKETBALL_Manager
             if (collision.transform.tag == "ground")
             {
                 collision_num++;
-            }
-        }
-
-        private void OnCollisionExit2D(Collision2D collision)
-        {
-            if (collision_num == 3)
-            {
-                Destroy(gameObject);
-                exist = false;
+                if (collision_num == 3)
+                {
+                    Destroy(gameObject);
+                    exist = false;
+                }
             }
         }
     }

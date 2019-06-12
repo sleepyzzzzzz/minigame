@@ -9,6 +9,11 @@ public class Level2backmanager : MonoBehaviour
     public float acornsfallspeed;
     public float acornsfallfrequency;
     public float basketballfallspeed;
+    private bool round_over = false;
+    private float WaitFall = 5f;
+    private float WaitFallTimer = 0f;
+    private float WaitLoad = 5f;
+    private float WaitLoadTimer = 0f;
     [Space]
     public Transform player;
     public float Zone_xmin;
@@ -16,31 +21,64 @@ public class Level2backmanager : MonoBehaviour
     private GameObject[] all_acorns;
     private GameObject Basketball;
     public Transform Wall;
+    public ACORNS[] acorn = null;
+
+    private string acornspath = "Prefabs/AcornsPrefab";
 
     // Start is called before the first frame update
     void Start()
     {
-        all_acorns = GameObject.FindGameObjectsWithTag("acorns");
+        LoadAcorns();
         Basketball = GameObject.FindGameObjectWithTag("basketball");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.frameCount % 150 == 0)
+        WaitFallTimer += Time.deltaTime;
+        if (WaitFallTimer >= WaitFall)
         {
             StartCoroutine(AcornsFall());
+            WaitFallTimer = 0f;
+        }
+        if (round_over)
+        {
+            WaitLoadTimer += Time.deltaTime;
+            if (WaitLoadTimer >= WaitLoad)
+            {
+                LoadAcorns();
+                WaitLoadTimer = 0f;
+                round_over = false;
+            }
         }
         BasketBallFall();
     }
 
+
     private IEnumerator AcornsFall()
     {
-        for (int i = 0; i < all_acorns.Length; i++)
+        for (int j = 0; j < acorn.Length; j++)
         {
-            all_acorns[i].GetComponent<Rigidbody2D>().velocity = new Vector2(0, -acornsfallspeed);
-            //Destroy(all_acorns[i], 3f);
+            acorn[j].Speed = acornsfallspeed;
+            acorn[j].falling = true;
             yield return new WaitForSeconds(acornsfallfrequency);
+            if (j == acorn.Length - 1 && acorn[j].destroy)
+            {
+                round_over = true;
+                acorn = null;
+                acorn = new ACORNS[9];
+            }
+        }
+    }
+
+    private void LoadAcorns()
+    {
+        for (int i = 0; i < acorn.Length; i++)
+        {
+            string name = acornspath + "/橡果" + (i + 1).ToString();
+            GameObject one = Resources.Load(name) as GameObject;
+            GameObject one_acorns = Instantiate(one);
+            acorn[i] = one_acorns.GetComponent<ACORNS>();
         }
     }
 
