@@ -9,12 +9,13 @@ public class Level1SpecialPortal : MonoBehaviour
     public bool isRed;
     private KeyCode ListenKey;
     private Animator anim;
-    public AudioClip PortalAudio;
+    private AudioSource PortalAudio;
 
     private void Start()
     {
         anim = GetComponent<Animator>();
         ListenKey = isRed ? KeyCode.Mouse1 : KeyCode.Mouse0;
+        PortalAudio = GetComponent<AudioSource>();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -23,7 +24,7 @@ public class Level1SpecialPortal : MonoBehaviour
         {
             anim.SetTrigger("Go");
             GetComponent<Collider2D>().enabled = false;
-            AudioSource.PlayClipAtPoint(PortalAudio, transform.position);
+            PortalAudio.Play();
         }
     }
 
