@@ -51,7 +51,6 @@ namespace Controller
                     Action();
                     break;
                 case Player_State.Dead:
-                    Debug.Log("fail");
                     player_animator.SetBool("running", false);
                     player_animator.SetBool("hurt", false);
                     player_animator.SetFloat("verti", 0.0f);

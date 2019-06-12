@@ -1445,7 +1445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acornsfallspeed: 6
-  acornsfallfrequency: 1
+  acornsfallfrequency: 2
   basketballfallspeed: 5
   player: {fileID: 582833694}
   Zone_xmin: 65.4

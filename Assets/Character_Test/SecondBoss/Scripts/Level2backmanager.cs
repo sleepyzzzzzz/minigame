@@ -10,7 +10,6 @@ public class Level2backmanager : MonoBehaviour
     public float acornsfallfrequency;
     public float basketballfallspeed;
     private bool round_over = false;
-    private bool reload;
     private float WaitFall = 5f;
     private float WaitFallTimer = 0f;
     private float WaitLoad = 5f;
@@ -47,12 +46,8 @@ public class Level2backmanager : MonoBehaviour
             WaitLoadTimer += Time.deltaTime;
             if (WaitLoadTimer >= WaitLoad)
             {
-                if (!reload)
-                {
-                    LoadAcorns();
-                    reload = true;
-                    WaitLoadTimer = 0f;
-                }
+                LoadAcorns();
+                WaitLoadTimer = 0f;
                 round_over = false;
             }
         }
@@ -62,22 +57,23 @@ public class Level2backmanager : MonoBehaviour
 
     private IEnumerator AcornsFall()
     {
-        for (int i = 0; i < 9; i++)
+        for (int j = 0; j < acorn.Length; j++)
         {
-            acorn[i].Speed = acornsfallspeed;
-            acorn[i].falling = true;
+            acorn[j].Speed = acornsfallspeed;
+            acorn[j].falling = true;
             yield return new WaitForSeconds(acornsfallfrequency);
-            if (i == acorn.Length - 1 && acorn[i].destroy)
+            if (j == acorn.Length - 1 && acorn[j].destroy)
             {
                 round_over = true;
-                reload = false;
+                acorn = null;
+                acorn = new ACORNS[9];
             }
         }
     }
 
     private void LoadAcorns()
     {
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < acorn.Length; i++)
         {
             string name = acornspath + "/橡果" + (i + 1).ToString();
             GameObject one = Resources.Load(name) as GameObject;
