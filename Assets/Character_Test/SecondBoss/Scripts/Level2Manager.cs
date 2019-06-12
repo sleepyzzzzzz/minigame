@@ -63,7 +63,10 @@ namespace LevelManage
 
         private void Awake()
         {
-            GameObject.FindGameObjectWithTag("TechBall").GetComponent<KickBall>().enabled = false;
+            if(GameObject.FindGameObjectWithTag("TechBall")!=null)
+            {
+                GameObject.FindGameObjectWithTag("TechBall").GetComponent<KickBall>().enabled = false;
+            }
         }
 
         /// <summary>发送消息
