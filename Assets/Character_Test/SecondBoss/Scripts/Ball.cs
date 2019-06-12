@@ -55,9 +55,11 @@ namespace Level2Tool
                 case "Goal":
                     if(this.ballType == BallType.TechBall)
                     {
-                        if (SecondBoss_Classmate.AnimState.name != "防守")
+                        if (!SecondBoss_Classmate.isdefending)
                         {
                             Level2Manager.Instance().ProcessMessage(ActionType.ShootSuccess);
+                            Level2Manager.ChargeNum = 0;
+                            Level2Manager.ShootSuccessNum++;
                         }
                         Destroy(gameObject);
                         Level2Manager.Instance().InstalizeBall(BallType.TechBall, new Vector3(4.88f, 13.85f, -1f));
@@ -77,6 +79,7 @@ namespace Level2Tool
                         if (hit_ground_num == 3)
                         {
                             Level2Manager.Instance().ProcessMessage(ActionType.ShootFailed);
+                            Level2Manager.ChargeNum = 0;
                             Destroy(gameObject);
                             Level2Manager.Instance().InstalizeBall(BallType.TechBall, new Vector3(4.88f, 13.85f, -1f));
                             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSkill>().enabled = true;
