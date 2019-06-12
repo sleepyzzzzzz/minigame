@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using LevelManage;
 
 public enum Player_State
 {
@@ -41,6 +42,7 @@ namespace Controller
         {
             player = GetComponent<Rigidbody2D>();
             player_animator = GetComponent<Animator>();
+            Level2Manager.Instance().ReadyToShoot += JumpIntoTech;
         }
 
         // Update is called once per frame
@@ -170,9 +172,11 @@ namespace Controller
             }
         }
 
-        public static void Got_Hurt(bool hurt_boolean)
+        private void JumpIntoTech()
         {
-            player_animator.SetBool("hurt", hurt_boolean);
+            this.transform.GetComponent<Rigidbody2D>().isKinematic = true;
+            Vector3 pos = GameObject.FindGameObjectWithTag("TechBall").transform.position;
+            this.transform.position = new Vector3(pos.x + 1.9f, pos.y, pos.z);
         }
 
         public void Dead_State(string tag)
