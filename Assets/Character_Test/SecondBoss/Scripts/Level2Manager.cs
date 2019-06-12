@@ -25,6 +25,8 @@ namespace LevelManage
     /// </summary>
     public class Level2Manager : UnitySingleton<Level2Manager>
     {
+        private bool ListenKey = false;
+
         /// <summary>传送门累计获取的足球数
         /// 
         /// </summary>
@@ -81,6 +83,10 @@ namespace LevelManage
             if (PlayerController.State == Player_State.Dead)
             {
                 Level2LoseAsync();
+            }
+            if(ListenKey&&Input.anyKeyDown)
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Level3");
             }
         }
 
@@ -148,6 +154,7 @@ namespace LevelManage
             win = true;
             StartCoroutine(ImageAlphaAnim(mask, 1, 1.5f));
             WinUI.SetActive(true);
+            ListenKey = true;
         }
 
         IEnumerator ImageAlphaAnim(Image image, float EndValue, float time)
