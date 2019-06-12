@@ -9,12 +9,13 @@ public class CameraFollower : MonoBehaviour {
     private float smooth = 5.5f;
     public float xmin;
     public float xmax;
-    public static bool follow;
+    private bool follow = true;
 
     private void Start()
     {
-        follow = true;
         Level2Manager.Instance().ReadyToShoot += ChangeMargin;
+        Level2Manager.Instance().ShootSuccess += BackToFollow;
+        Level2Manager.Instance().ShootFailed += BackToFollow;
     }
 
     private void FixedUpdate()
@@ -34,8 +35,12 @@ public class CameraFollower : MonoBehaviour {
     private void ChangeMargin()
     {
         follow = false;
-        Debug.Log("dsads");
         Vector3 pos = this.transform.position;
         this.transform.position = new Vector3(-0.7f, transform.position.y, transform.position.z);
+    }
+
+    private void BackToFollow()
+    {
+        follow = true;
     }
 }

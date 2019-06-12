@@ -34,6 +34,8 @@ namespace Controller
 
         private bool walk;
         private bool hurt;
+        private Vector3 pre_pos;
+
         public static Player_State State = Player_State.Alive;
         Collision_Object Collide = Collision_Object.SmallChalk;
 
@@ -43,6 +45,7 @@ namespace Controller
             player = GetComponent<Rigidbody2D>();
             player_animator = GetComponent<Animator>();
             Level2Manager.Instance().ReadyToShoot += JumpIntoTech;
+            Level2Manager.Instance().ShootSuccess += BackToBossGame;             Level2Manager.Instance().ShootFailed += BackToBossGame;
         }
 
         // Update is called once per frame
@@ -178,6 +181,8 @@ namespace Controller
             Vector3 pos = GameObject.FindGameObjectWithTag("TechBall").transform.position;
             this.transform.position = new Vector3(pos.x + 1.9f, pos.y, pos.z);
         }
+
+        private void BackToBossGame()         {             this.transform.GetComponent<Rigidbody2D>().isKinematic = false;             this.transform.position = pre_pos;         }
 
         public void Dead_State(string tag)
         {
