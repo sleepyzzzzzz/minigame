@@ -150,7 +150,6 @@ namespace LevelManage
 
         private void Level2LoseAsync()
         {
-            if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name== "Level2-boss")
             UnityEngine.SceneManagement.SceneManager.LoadScene("Level2-boss");
             PlayerController.State = Player_State.Alive;
         }
