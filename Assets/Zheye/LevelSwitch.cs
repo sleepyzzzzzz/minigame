@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Level1ToLevel2 : MonoBehaviour
+public class LevelSwitch : MonoBehaviour
 {
+    public string NextSceneName;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag=="Player")
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Level1—boss");
+            UnityEngine.SceneManagement.SceneManager.LoadScene(NextSceneName);
         }
     }
 }

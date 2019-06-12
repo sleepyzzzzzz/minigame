@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using LevelManage;
 
 public enum Player_State
 {
@@ -29,6 +30,7 @@ namespace Controller
 
         private int first_chalk_hit_count = 0;
         private int ball_hit_count = 0;
+        private int plane_hit_count = 0;
 
         private bool walk;
         private bool hurt;
@@ -40,6 +42,7 @@ namespace Controller
         {
             player = GetComponent<Rigidbody2D>();
             player_animator = GetComponent<Animator>();
+            Level2Manager.Instance().ReadyToShoot += JumpIntoTech;
         }
 
         // Update is called once per frame
@@ -51,7 +54,6 @@ namespace Controller
                     Action();
                     break;
                 case Player_State.Dead:
-                    Debug.Log("fail");
                     player_animator.SetBool("running", false);
                     player_animator.SetBool("hurt", false);
                     player_animator.SetFloat("verti", 0.0f);
@@ -148,6 +150,10 @@ namespace Controller
                     ball_hit_count++;
                     hurt = true;
                     break;
+                case "Plane":
+                    if(!collision.collider.GetComponent<PaperPlane>().isBigPlane) plane_hit_count++;
+                    hurt = true;
+                    break;
             }
             Hurt_Anim();
             Dead_State(collision.collider.tag);
@@ -166,14 +172,15 @@ namespace Controller
             }
         }
 
-        public static void Got_Hurt(bool hurt_boolean)
+        private void JumpIntoTech()
         {
-            player_animator.SetBool("hurt", hurt_boolean);
+            this.transform.GetComponent<Rigidbody2D>().isKinematic = true;
+            Vector3 pos = GameObject.FindGameObjectWithTag("TechBall").transform.position;
+            this.transform.position = new Vector3(pos.x + 1.9f, pos.y, pos.z);
         }
 
         public void Dead_State(string tag)
         {
-            Debug.Log(ball_hit_count);
             switch (tag)
             {
                 case "SmallChalk":
@@ -193,6 +200,13 @@ namespace Controller
                     if (ball_hit_count == 2)
                     {
                         State = Player_State.Dead;
+                    }
+                    break;
+                case "Plane":
+                    if(plane_hit_count==3)
+                    {
+                        State = Player_State.Dead;
+                        if (facing_left) { facing_right = true; facing_left = false; }
                     }
                     break;
             }

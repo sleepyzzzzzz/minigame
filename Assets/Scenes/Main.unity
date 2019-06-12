@@ -38,7 +38,11 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+<<<<<<< HEAD
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+=======
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+>>>>>>> 2c188d886657dd0d6ab08584d84766a7be0cd1d6
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2423,6 +2427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f314f4e558db8e042bbb9e1e3744e214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NextSceneName: Level1-boss
 --- !u!1 &1096640767
 GameObject:
   m_ObjectHideFlags: 0
@@ -3851,10 +3856,10 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0.08
   m_Points:
-  - {x: -17.7267, y: -5.600997}
-  - {x: -17.7267, y: 4.407134}
-  - {x: 74.985115, y: 4.407134}
-  - {x: 74.98512, y: -5.600997}
+  - {x: -17.81006, y: -5.600997}
+  - {x: -17.807144, y: 4.4875793}
+  - {x: 75.06438, y: 4.486395}
+  - {x: 75.06342, y: -5.5786266}
 --- !u!1 &1966247240
 GameObject:
   m_ObjectHideFlags: 0

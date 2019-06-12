@@ -28,12 +28,7 @@ namespace portal
             //与粉笔碰撞
             if (collision.collider.tag == "SmallChalk")
             {
-                if(collision.collider.GetComponent<Chalk>().isBigChalk)
-                {
-                    Debug.Log("传送大粉笔成功");
-                    if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Level1—boss") Level1Manager.Instance.GetBigChalk();
-                }
-                else
+                if(!collision.collider.GetComponent<Chalk>().isBigChalk)
                 {
                     if (this.tag == "BluePortal")
                     {
@@ -46,10 +41,29 @@ namespace portal
                     Destroy(gameObject);
                 }
             }
-            if(collision.collider.tag=="Book"&&this.tag=="BluePortal")
+            else if(collision.collider.tag=="Book"&&this.tag=="BluePortal")
             {
-                Debug.Log("传送练习册成功");
                 if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Level1—boss") Level1Manager.Instance.GetBook();
+            }
+            else if(collision.collider.tag=="Plane")
+            {
+                PaperPlane pp = collision.collider.GetComponent<PaperPlane>();
+                if (pp.isBigPlane)
+                {
+                    if(this.tag=="RedPortal") Level3Manager.Instance.GetPlane();
+                } 
+                else
+                {
+                    if (this.tag == "BluePortal")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSkill>().SetBlueCold();
+                    }
+                    else if (this.tag == "RedPortal")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSkill>().SetRedCold();
+                    }
+                    Destroy(gameObject);
+                }
             }
 
             switch (type)

@@ -21,45 +21,47 @@ public class Level1Manager : MonoBehaviour
     }
 
     private int hurtCount = 0;
-    private int BigChalkCount = 0;
     private int BookCount = 0;
 
-    public Text BigChalkText;
     public Text BookText;
 
     public Image mask;
     public GameObject WinUI;
+    public GameObject TipsUI;
+
+    public GameObject[] hpImages;
     
     private void Awake()
     {
         _instance = this;
     }
 
+    private void Start()
+    {
+        TipsUI.SetActive(true);
+        Time.timeScale = 0;
+        TipsUI.GetComponentInChildren<Button>().onClick.AddListener(() => { Destroy(TipsUI); Time.timeScale = 1; });
+    }
+
 
     public void PlayerGetHurt()
     {
+        hpImages[hurtCount].SetActive(false);
         hurtCount++;
         if (hurtCount >= 3)
         {
             Invoke("Level1LoseAsync", 2f);
             hurtCount = 0;
-            BigChalkCount = 0;
             BookCount = 0;
         }
     }
 
-    public void GetBigChalk()
-    {
-        BigChalkCount++;
-        BigChalkText.text = BigChalkCount + "/3";
-        if (BigChalkCount >= 3 && BookCount >= 3) Level1Win();
-    }
 
     public void GetBook()
     {
         BookCount++;
         BookText.text = BookCount + "/3";
-        if (BigChalkCount >= 3 && BookCount >= 3) Level1Win();
+        if (BookCount >= 3) Level1Win();
     }
 
     public void Level1LoseAsync()
@@ -87,4 +89,6 @@ public class Level1Manager : MonoBehaviour
         }
         image.color = new Color(image.color.r, image.color.g, image.color.b, EndValue);
     }
+
+
 }

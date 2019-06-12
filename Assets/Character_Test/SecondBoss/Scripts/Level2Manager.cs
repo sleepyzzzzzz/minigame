@@ -60,6 +60,15 @@ namespace LevelManage
         /// 
         /// </summary>
         public event Action ShootFailed;
+
+        private void Awake()
+        {
+            if(GameObject.FindGameObjectWithTag("TechBall")!=null)
+            {
+                GameObject.FindGameObjectWithTag("TechBall").GetComponent<KickBall>().enabled = false;
+            }
+        }
+
         /// <summary>发送消息
         /// 
         /// </summary>
@@ -115,8 +124,6 @@ namespace LevelManage
             
         //}
 
-
     }
 
 }
-

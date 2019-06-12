@@ -10,7 +10,6 @@ public class LoadToBoss : MonoBehaviour
         if (collision.transform.tag == "Player")
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("Level2-boss");
-            PlayerSkill.level = Level.Level2;
         }
     }
 }
