@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using LevelManage;
 
 public class KickBall : MonoBehaviour
 {
@@ -11,26 +12,29 @@ public class KickBall : MonoBehaviour
 
     private void Update()
     {
-        Vector3 startpos = this.transform.position;
-        Vector3 endpos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (Input.GetMouseButtonDown(0))
+        if (Level2Manager.ChargeNum == 3)
         {
-            InitializeLine();
-            draw = true;
-        }
-        if (draw)
-        {
-            lr.SetVertexCount(2);
-            lr.SetPosition(0, startpos);
-            lr.SetPosition(1, endpos);
-        }
-        if (Input.GetMouseButtonUp(0) && draw)
-        {
-            this.transform.GetComponent<Rigidbody2D>().isKinematic = false;
-            Destroy(lrObj, 0.1f);
-            Vector3 direction = endpos - startpos;
-            this.transform.GetComponent<Rigidbody2D>().velocity = new Vector3(direction.x, direction.y, direction.z) * 2.5f;
-            draw = false;
+            Vector3 startpos = this.transform.position;
+            Vector3 endpos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (Input.GetMouseButtonDown(0))
+            {
+                InitializeLine();
+                draw = true;
+            }
+            if (draw)
+            {
+                lr.SetVertexCount(2);
+                lr.SetPosition(0, startpos);
+                lr.SetPosition(1, endpos);
+            }
+            if (Input.GetMouseButtonUp(0) && draw)
+            {
+                this.transform.GetComponent<Rigidbody2D>().isKinematic = false;
+                Destroy(lrObj, 0.1f);
+                Vector3 direction = endpos - startpos;
+                this.transform.GetComponent<Rigidbody2D>().velocity = new Vector3(direction.x, direction.y, direction.z) * 2.5f;
+                draw = false;
+            }
         }
     }
 

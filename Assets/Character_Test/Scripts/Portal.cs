@@ -65,6 +65,18 @@ namespace portal
                     Destroy(gameObject);
                 }
             }
+            else if (collision.collider.tag == "BlackBall")
+            {
+                if (this.tag == "BluePortal")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSkill>().SetBlueCold();
+                }
+                else if (this.tag == "RedPortal")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSkill>().SetRedCold();
+                }
+                Destroy(gameObject);
+            }
 
             switch (type)
             {
@@ -116,7 +128,7 @@ namespace portal
         public bool CheckTag(string tagname)
         {
             foreach (TransTag tag in Enum.GetValues(typeof(TransTag)))
-                {
+            {
                 if(tagname.Equals(tag.ToString()))
                 {
                     return true;

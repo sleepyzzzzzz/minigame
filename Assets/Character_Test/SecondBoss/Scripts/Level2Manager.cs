@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using wind;
 using Level2Tool;
+using Controller;
 
 namespace LevelManage
 {
@@ -61,10 +63,26 @@ namespace LevelManage
         /// </summary>
         public event Action ShootFailed;
 
+        public Image mask;
+        public GameObject WinUI;
+
         private void Awake()
         {
-            Level2Manager.Instance().InstalizeBall(BallType.TechBall, new Vector3(4.88f, 13.85f, -1f));
-            GameObject.FindGameObjectWithTag("TechBall").GetComponent<KickBall>().enabled = false;
+            InstalizeBall(BallType.TechBall, new Vector3(4.88f, 13.85f, -1f));
+            ShootSuccess = restart_success_kick;
+            ShootFailed = restart_fail_kick;
+        }
+
+        private void FixedUpdate()
+        {
+            if (ShootSuccessNum == 3)
+            {
+                Level2Win();
+            }
+            if (PlayerController.State == Player_State.Dead)
+            {
+                Level2LoseAsync();
+            }
         }
 
         /// <summary>发送消息
@@ -116,10 +134,44 @@ namespace LevelManage
         public void InstalizeBall(BallType type, Vector3 transform)
         {
             GameObject Ball = Instantiate(Resources.Load(toolpath + type.ToString()), transform, Quaternion.identity) as GameObject;
-            //Ball tech = Ball.GetComponent<Ball>();
             Ball.GetComponent<Ball>().ballType = type;
         }
 
-    }
+        private void restart_success_kick()
+        {
+            ChargeNum = 0;
+            ShootSuccessNum++;
+        }
 
+        private void restart_fail_kick()
+        {
+            ChargeNum = 0;
+        }
+
+        private void Level2LoseAsync()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Level2-boss");
+            PlayerController.State = Player_State.Alive;
+        }
+
+        public void Level2Win()
+        {
+            StartCoroutine(ImageAlphaAnim(mask, 1, 1.5f));
+            WinUI.SetActive(true);
+        }
+
+        IEnumerator ImageAlphaAnim(Image image, float EndValue, float time)
+        {
+            int timer = 0;
+            int frameCount = (int)(time / Time.fixedDeltaTime);
+            float Step = (EndValue - image.color.a) / frameCount;
+            while (timer < frameCount)
+            {
+                image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + Step);
+                timer++;
+                yield return 0;
+            }
+            image.color = new Color(image.color.r, image.color.g, image.color.b, EndValue);
+        }
+    }
 }

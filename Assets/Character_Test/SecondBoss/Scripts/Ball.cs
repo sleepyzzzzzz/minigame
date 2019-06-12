@@ -33,10 +33,10 @@ namespace Level2Tool
                     {
                         Level2Manager.Instance().ProcessMessage(ActionType.HitPortal);
                         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSkill>().SetBlueCold();
-                        Destroy(gameObject);
                     }
                     else if (this.ballType == BallType.BlueBall)
                     {
+                        Destroy(gameObject);
                         OnHitPortal();
                     }
                     break;
@@ -45,18 +45,23 @@ namespace Level2Tool
                     {
                         Level2Manager.Instance().ProcessMessage(ActionType.HitPortal);
                         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSkill>().SetRedCold();
-                        Destroy(gameObject);
                     }
                     else if (this.ballType == BallType.BlueBall)
                     {
+                        Destroy(gameObject);
                         OnHitPortal();
                     }
                     break;
                 case "Goal":
-                    Debug.Log("GOAL");
                     if(this.ballType == BallType.TechBall)
                     {
-                        Level2Manager.Instance().ProcessMessage(ActionType.ShootSuccess);
+                        if (SecondBoss_Classmate.AnimState.name != "防守")
+                        {
+                            Level2Manager.Instance().ProcessMessage(ActionType.ShootSuccess);
+                        }
+                        Destroy(gameObject);
+                        Level2Manager.Instance().InstalizeBall(BallType.TechBall, new Vector3(4.88f, 13.85f, -1f));
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSkill>().enabled = true;
                     }
                     break;
                 case "Player":
@@ -73,6 +78,8 @@ namespace Level2Tool
                         {
                             Level2Manager.Instance().ProcessMessage(ActionType.ShootFailed);
                             Destroy(gameObject);
+                            Level2Manager.Instance().InstalizeBall(BallType.TechBall, new Vector3(4.88f, 13.85f, -1f));
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSkill>().enabled = true;
                         }
                     }
                     break;
@@ -101,12 +108,9 @@ namespace Level2Tool
                     break;
                 case 3://充能数为3，通知订阅者做射门准备
                     Level2Manager.Instance().ProcessMessage(ActionType.ReadyToShoot);
-                    GameObject.FindGameObjectWithTag("TechBall").GetComponent<KickBall>().enabled = true;
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSkill>().enabled = false;
                     break;
             }
-
         }
     }
 }
-
-
