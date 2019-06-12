@@ -10,8 +10,12 @@ public class LevelSwitch : MonoBehaviour
     {
         if(collision.tag=="Player")
         {
-            if (LevelEndClip != null) AudioSource.PlayClipAtPoint(LevelEndClip, transform.position);
-            Invoke("go", 1f);
+            if (LevelEndClip != null)
+            {
+                AudioSource.PlayClipAtPoint(LevelEndClip, transform.position);
+                Invoke("go", 1f);
+            }
+            else go();
         }
     }
 
