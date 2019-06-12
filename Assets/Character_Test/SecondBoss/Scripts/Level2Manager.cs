@@ -32,7 +32,7 @@ namespace LevelManage
         /// <summary>玩家射门成功的次数
         /// 
         /// </summary>
-        public static int ShootSuccessNum = 2;
+        public static int ShootSuccessNum = 0;
         /// <summary>第二关道具（除了传送门）的prefab资源路径
         /// 
         /// </summary>

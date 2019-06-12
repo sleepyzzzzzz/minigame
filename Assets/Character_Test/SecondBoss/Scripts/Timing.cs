@@ -17,7 +17,7 @@ namespace Clock
         void Start()
         {
             TimeText.text = string.Format("剩余时间: {0:D1}:{1:D2}", (int)level_time / 60, (int)level_time % 60);
-            StartCoroutine(Counting());
+            StartCoroutine("Counting");
         }
 
         private void Update()
@@ -42,7 +42,7 @@ namespace Clock
             if (Level2Manager.win)
             {
                 over = true;
-                StopCoroutine(Counting());
+                StopCoroutine("Counting");
             }
         }
     }
