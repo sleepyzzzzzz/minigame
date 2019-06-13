@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3816860477442026233}
   m_Layer: 0
   m_Name: "\u6A61\u679C4"
-  m_TagString: acorns
+  m_TagString: acorns4
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,7 +113,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 2802bcc5d7d95405d829285c00c5bfbf, type: 2}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.1149452, y: -0.3383142}

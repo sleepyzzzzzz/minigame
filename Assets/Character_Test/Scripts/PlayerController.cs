@@ -31,6 +31,7 @@ namespace Controller
         private int first_chalk_hit_count = 0;
         private int ball_hit_count = 0;
         private int plane_hit_count = 0;
+        public static int acorns_hit_count = 0;
 
         private bool walk;
         private bool hurt;
@@ -163,6 +164,11 @@ namespace Controller
             Dead_State(collision.collider.tag);
         }
 
+        private void OnCollisionExit2D(Collision2D collision)
+        {
+            Hurt_Anim();
+        }
+
         private void Hurt_Anim()
         {
             if (hurt)
@@ -182,12 +188,10 @@ namespace Controller
             Vector3 pos = GameObject.FindGameObjectWithTag("TechBall").transform.position;
             //this.transform.Translate(new Vector3(pos.x + 1.9f - pre_pos.x, pos.y - pre_pos.y, 0));
             this.transform.position = new Vector3(pos.x + 1.9f, pos.y + 0.1f, this.transform.position.z);
-            //this.transform.GetComponent<Rigidbody2D>().isKinematic = true;
         }
 
         private void BackToBossGame()
         {
-            //this.transform.GetComponent<Rigidbody2D>().isKinematic = false;
             this.transform.position = pre_pos;
         }
 
@@ -206,12 +210,14 @@ namespace Controller
                     if (ball_hit_count == 2)
                     {
                         State = Player_State.Dead;
+                        if (facing_right) { facing_left = true; facing_right = false; }
                     }
                     break;
                 case "BlackBall":
                     if (ball_hit_count == 2)
                     {
                         State = Player_State.Dead;
+                        if (facing_right) { facing_left = true; facing_right = false; }
                     }
                     break;
                 case "Plane":

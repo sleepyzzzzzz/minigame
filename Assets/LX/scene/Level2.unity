@@ -1379,7 +1379,6 @@ GameObject:
   m_Component:
   - component: {fileID: 911454960}
   - component: {fileID: 911454961}
-  - component: {fileID: 911454962}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -1415,7 +1414,7 @@ EdgeCollider2D:
   m_GameObject: {fileID: 911454959}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 2802bcc5d7d95405d829285c00c5bfbf, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -1426,42 +1425,6 @@ EdgeCollider2D:
   - {x: 26.269775, y: 2.1814108}
   - {x: 122.13925, y: 2.1664734}
   - {x: 122.14872, y: -7.9393425}
---- !u!114 &911454962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 911454959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea978ce2dc4784e9ab7175c0538aa44d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  acornsfallspeed: 5
-  basketballfallspeed: 5
-  fre_acornsfall1: 2
-  fre_acornsgenr1: 1
-  fre_acornsfall2: 2
-  fre_acornsgenr2: 4
-  fre_acornsfall3: 2
-  fre_acornsgenr3: 3
-  fre_acornsfall4: 2
-  fre_acornsgenr4: 1
-  fre_acornsfall5: 2
-  fre_acornsgenr5: 6
-  fre_acornsfall6: 2
-  fre_acornsgenr6: 7
-  fre_acornsfall7: 1
-  fre_acornsgenr7: 3
-  fre_acornsfall8: 2
-  fre_acornsgenr8: 5
-  fre_acornsfall9: 2
-  fre_acornsgenr9: 6
-  player: {fileID: 582833694}
-  Zone_xmin: 65.4
-  Zone_xmax: 68.2
-  Wall: {fileID: 1873252751}
 --- !u!1 &1118513526
 GameObject:
   m_ObjectHideFlags: 0
@@ -1708,6 +1671,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594532596}
   m_CullTransparentMesh: 0
+--- !u!1 &1617916373
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1617916375}
+  - component: {fileID: 1617916374}
+  m_Layer: 0
+  m_Name: Level2BackManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1617916374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617916373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea978ce2dc4784e9ab7175c0538aa44d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acornsfallspeed: 5
+  basketballfallspeed: 5
+  player: {fileID: 582833694}
+  Wall: {fileID: 1873252751}
+  Zone_xmin: 65.4
+  Zone_xmax: 68.2
+  all_values:
+  - {x: 1, y: 6}
+  - {x: 2, y: 7}
+  - {x: 3, y: 7}
+  - {x: 8, y: 1}
+  - {x: 2, y: 6}
+  - {x: 1, y: 7}
+  - {x: 3, y: 8}
+  - {x: 1, y: 1}
+  - {x: 1, y: 3}
+--- !u!4 &1617916375
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617916373}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 35.032967, y: 1.3029442, z: 8.758631}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1873252750
 GameObject:
   m_ObjectHideFlags: 0

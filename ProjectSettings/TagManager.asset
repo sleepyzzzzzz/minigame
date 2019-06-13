@@ -9,13 +9,21 @@ TagManager:
   - SmallChalk
   - ground
   - Book
-  - acorns
   - basketball
   - BlackBall
   - BlueBall
   - TechBall
   - Plane
   - Goal
+  - acorns1
+  - acorns2
+  - acorns3
+  - acorns4
+  - acorns5
+  - acorns6
+  - acorns7
+  - acorns8
+  - acorns9
   layers:
   - Default
   - TransparentFX
