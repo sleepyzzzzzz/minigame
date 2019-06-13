@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Controller;
 
 namespace BASKETBALL_Manager
 {
@@ -11,15 +12,21 @@ namespace BASKETBALL_Manager
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.transform.tag == "ground")
+            switch (collision.collider.tag)
             {
-                collision_num++;
-                Debug.Log(collision_num);
-                if (collision_num == 3)
-                {
+                case "Player":
+                    PlayerController.Level2_Hurt(true);
                     Destroy(gameObject);
-                    exist = false;
-                }
+                    Level2backmanager.Instance.PlayerGetHurt();
+                    break;
+                case "ground":
+                    collision_num++;
+                    if (collision_num == 3)
+                    {
+                        Destroy(gameObject);
+                        exist = false;
+                    }
+                    break;
             }
         }
     }

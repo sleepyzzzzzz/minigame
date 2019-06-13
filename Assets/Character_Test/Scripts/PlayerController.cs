@@ -45,9 +45,12 @@ namespace Controller
         {
             player = GetComponent<Rigidbody2D>();
             player_animator = GetComponent<Animator>();
-            Level2Manager.Instance().ReadyToShoot += JumpIntoTech;
-            Level2Manager.Instance().ShootSuccess += BackToBossGame;
-            Level2Manager.Instance().ShootFailed += BackToBossGame;
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Level2-boss")
+            {
+                Level2Manager.Instance().ReadyToShoot += JumpIntoTech;
+                Level2Manager.Instance().ShootSuccess += BackToBossGame;
+                Level2Manager.Instance().ShootFailed += BackToBossGame;
+            }
         }
 
         // Update is called once per frame
@@ -228,6 +231,11 @@ namespace Controller
                     }
                     break;
             }
+        }
+
+        public static void Level2_Hurt(bool hu)
+        {
+            player_animator.SetBool("hurt", hu);
         }
     }
 }

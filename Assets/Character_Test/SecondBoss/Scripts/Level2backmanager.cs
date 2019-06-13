@@ -7,6 +7,19 @@ using Controller;
 
 public class Level2backmanager : MonoBehaviour
 {
+    private static Level2backmanager _instance;
+
+    public static Level2backmanager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = new Level2backmanager();
+            }
+            return _instance;
+        }
+    }
 
     public float acornsfallspeed;
     public float basketballfallspeed;
@@ -31,18 +44,24 @@ public class Level2backmanager : MonoBehaviour
     public static bool create9;
 
     //tutorial
-    [TextArea]
-    public string ToturialStr;
-    public KeyCode ListenKey;
-    private bool isListening = false;
-    public GameObject ToturialUI;
-    public GameObject mask;
+    [Space]
+    private int hurtCount = 0;
+    public GameObject[] hpImages;
+    public GameObject TipsUI;
 
     private string acornspath = "Prefabs/AcornsPrefab";
+
+    private void Awake()
+    {
+        _instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        TipsUI.SetActive(true);
+        Time.timeScale = 0;
+        TipsUI.GetComponentInChildren<Button>().onClick.AddListener(() => { Destroy(TipsUI); Time.timeScale = 1; });
         Basketball = GameObject.FindGameObjectWithTag("basketball");
         create1 = false;
         create2 = false;
@@ -58,15 +77,6 @@ public class Level2backmanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // tutorial
-        if (isListening && Input.GetKeyDown(ListenKey))
-        {
-            Time.timeScale = 1;
-            mask.SetActive(false);
-            ToturialUI.SetActive(false);
-            Destroy(gameObject);
-        }
-
         BasketBallFall();
         if (!create1)
         {
@@ -232,16 +242,22 @@ public class Level2backmanager : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Level2LoseAsync()
     {
-        if (collision.tag == "Player")
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Level2")
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Level2");
+        PlayerController.State = Player_State.Alive;
+    }
+
+    public void PlayerGetHurt()
+    {
+        hpImages[hurtCount].SetActive(false);
+        hurtCount++;
+        if (hurtCount >= 3)
         {
-            //画面静止并提示
-            Time.timeScale = 0;
-            isListening = true;
-            mask.SetActive(true);
-            ToturialUI.SetActive(true);
-            ToturialUI.transform.Find("Text").GetComponent<Text>().text = ToturialStr;
+            PlayerController.State = Player_State.Dead;
+            Invoke("Level2LoseAsync", 2f);
+            hurtCount = 0;
         }
     }
 }

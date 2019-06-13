@@ -66,9 +66,10 @@ namespace LevelManage
         public event Action ShootFailed;
 
         public static bool win = false;
-        public static int hurtCount = 0;
         public Image mask;
         public GameObject WinUI;
+        public GameObject TipsUI;
+        private int hurtCount = 0;
         public GameObject[] hpImages;
         public Text GoalText;
 
@@ -76,13 +77,16 @@ namespace LevelManage
         {
             if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Level2-boss")
             InstalizeBall(BallType.TechBall, new Vector3(4.88f, 13.85f, -1f));
+            TipsUI.SetActive(true);
+            Time.timeScale = 0;
+            TipsUI.GetComponentInChildren<Button>().onClick.AddListener(() => { Destroy(TipsUI); Time.timeScale = 1; });
         }
 
         private void FixedUpdate()
         {
             if (ShootSuccessNum == 3)
             {
-                Level2Win();
+                Level2BossWin();
             }
             if(ListenKey&&Input.anyKeyDown)
             {
@@ -143,14 +147,14 @@ namespace LevelManage
             return Ball;
         }
 
-        private void Level2LoseAsync()
+        private void Level2BossLoseAsync()
         {
             if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name== "Level2-boss")
             UnityEngine.SceneManagement.SceneManager.LoadScene("Level2-boss");
             PlayerController.State = Player_State.Alive;
         }
 
-        public void Level2Win()
+        public void Level2BossWin()
         {
             win = true;
             StartCoroutine(ImageAlphaAnim(mask, 1, 1.5f));
@@ -178,7 +182,7 @@ namespace LevelManage
             hurtCount++;
             if (hurtCount >= 2)
             {
-                Invoke("Level2LoseAsync", 2f);
+                Invoke("Level2BossLoseAsync", 2f);
                 hurtCount = 0;
                 ChargeNum = 0;
                 ShootSuccessNum = 0;

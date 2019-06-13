@@ -17,7 +17,9 @@ public class ACORNS : MonoBehaviour
         switch (collision.tag)
         {
             case "Player":
+                PlayerController.Level2_Hurt(true);
                 Destroy(gameObject);
+                Level2backmanager.Instance.PlayerGetHurt();
                 PlayerController.acorns_hit_count++;
                 Recreate();
                 break;

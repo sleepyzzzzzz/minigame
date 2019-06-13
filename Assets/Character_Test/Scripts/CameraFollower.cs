@@ -13,9 +13,12 @@ public class CameraFollower : MonoBehaviour {
 
     private void Start()
     {
-        Level2Manager.Instance().ReadyToShoot += ChangeMargin;
-        Level2Manager.Instance().ShootSuccess += BackToFollow;
-        Level2Manager.Instance().ShootFailed += BackToFollow;
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Level2-boss")
+        {
+            Level2Manager.Instance().ReadyToShoot += ChangeMargin;
+            Level2Manager.Instance().ShootSuccess += BackToFollow;
+            Level2Manager.Instance().ShootFailed += BackToFollow;
+        }
     }
 
     private void FixedUpdate()
