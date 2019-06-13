@@ -66,8 +66,11 @@ namespace LevelManage
         public event Action ShootFailed;
 
         public static bool win = false;
+        public static int hurtCount = 0;
         public Image mask;
         public GameObject WinUI;
+        public GameObject[] hpImages;
+        public Text GoalText;
 
         private void Awake()
         {
@@ -80,10 +83,6 @@ namespace LevelManage
             if (ShootSuccessNum == 3)
             {
                 Level2Win();
-            }
-            if (PlayerController.State == Player_State.Dead)
-            {
-                Level2LoseAsync();
             }
             if(ListenKey&&Input.anyKeyDown)
             {
@@ -171,6 +170,24 @@ namespace LevelManage
                 yield return 0;
             }
             image.color = new Color(image.color.r, image.color.g, image.color.b, EndValue);
+        }
+
+        public void PlayerGetHurt()
+        {
+            hpImages[hurtCount].SetActive(false);
+            hurtCount++;
+            if (hurtCount >= 2)
+            {
+                Invoke("Level2LoseAsync", 2f);
+                hurtCount = 0;
+                ChargeNum = 0;
+                ShootSuccessNum = 0;
+            }
+        }
+
+        public void GoalIn()
+        {
+            GoalText.text = ShootSuccessNum + "/3";
         }
     }
 }

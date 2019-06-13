@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using BASKETBALL_Manager;
 using Controller;
 
@@ -29,6 +30,14 @@ public class Level2backmanager : MonoBehaviour
     public static bool create8;
     public static bool create9;
 
+    //tutorial
+    [TextArea]
+    public string ToturialStr;
+    public KeyCode ListenKey;
+    private bool isListening = false;
+    public GameObject ToturialUI;
+    public GameObject mask;
+
     private string acornspath = "Prefabs/AcornsPrefab";
 
     // Start is called before the first frame update
@@ -49,6 +58,15 @@ public class Level2backmanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // tutorial
+        if (isListening && Input.GetKeyDown(ListenKey))
+        {
+            Time.timeScale = 1;
+            mask.SetActive(false);
+            ToturialUI.SetActive(false);
+            Destroy(gameObject);
+        }
+
         BasketBallFall();
         if (!create1)
         {
@@ -211,6 +229,19 @@ public class Level2backmanager : MonoBehaviour
         {
             Basketball.GetComponent<Rigidbody2D>().velocity = new Vector2(-Mathf.Pow(3, 0.5f), -1) * basketballfallspeed;
             Basketball.GetComponent<Rigidbody2D>().isKinematic = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            //画面静止并提示
+            Time.timeScale = 0;
+            isListening = true;
+            mask.SetActive(true);
+            ToturialUI.SetActive(true);
+            ToturialUI.transform.Find("Text").GetComponent<Text>().text = ToturialStr;
         }
     }
 }
