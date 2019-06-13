@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1051,6 +1051,7 @@ GameObject:
   - component: {fileID: 582833689}
   - component: {fileID: 582833688}
   - component: {fileID: 582833687}
+  - component: {fileID: 582833695}
   m_Layer: 0
   m_Name: PLAYER
   m_TagString: Player
@@ -1574,6 +1575,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &582833695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582833686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c24978b4daa6b4f40b05ccfd348c2914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  music: {fileID: 0}
+  jump: {fileID: 0}
+  put: {fileID: 0}
 --- !u!1 &657620311
 GameObject:
   m_ObjectHideFlags: 0
@@ -1891,7 +1907,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5173\u5361\u4E8C\u8BF4\u660E"
+  m_Text: "\u5C0F\u5FC3\u6389\u843D\u7684\u6A61\u679C\u8FD8\u6709\u4E71\u98DE\u7684\u7BEE\u7403\u54E6\uFF0C\u88AB\u6253\u5230\u4F1A\u5F88\u75DB\u7684\u3002"
 --- !u!222 &860779611
 CanvasRenderer:
   m_ObjectHideFlags: 0
