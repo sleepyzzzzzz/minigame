@@ -16,6 +16,7 @@ namespace BASKETBALL_Manager
             {
                 case "Player":
                     Destroy(gameObject);
+                    exist = false;
                     Level2backmanager.Instance.PlayerGetHurt();
                     PlayerController.acorns_hit_count++;
                     PlayerController.hurt = true;
