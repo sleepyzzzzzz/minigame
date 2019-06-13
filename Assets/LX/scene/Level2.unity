@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1439,24 +1439,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acornsfallspeed: 5
-  acornsfallfrequency: 2
   basketballfallspeed: 5
-  WaitFall: 3
-  WaitLoad: 1
+  fre_acornsfall1: 2
+  fre_acornsgenr1: 1
+  fre_acornsfall2: 2
+  fre_acornsgenr2: 4
+  fre_acornsfall3: 2
+  fre_acornsgenr3: 3
+  fre_acornsfall4: 2
+  fre_acornsgenr4: 1
+  fre_acornsfall5: 2
+  fre_acornsgenr5: 6
+  fre_acornsfall6: 2
+  fre_acornsgenr6: 7
+  fre_acornsfall7: 1
+  fre_acornsgenr7: 3
+  fre_acornsfall8: 2
+  fre_acornsgenr8: 5
+  fre_acornsfall9: 2
+  fre_acornsgenr9: 6
   player: {fileID: 582833694}
   Zone_xmin: 65.4
   Zone_xmax: 68.2
   Wall: {fileID: 1873252751}
-  acorn:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &1118513526
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,27 +14,32 @@ public class KickBall : MonoBehaviour
     {
         if (Level2Manager.ChargeNum == 3)
         {
-            Vector3 startpos = this.transform.position;
-            Vector3 endpos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (Input.GetMouseButtonDown(0))
-            {
-                InitializeLine();
-                draw = true;
-            }
-            if (draw)
-            {
-                lr.SetVertexCount(2);
-                lr.SetPosition(0, startpos);
-                lr.SetPosition(1, endpos);
-            }
-            if (Input.GetMouseButtonUp(0) && draw)
-            {
-                this.transform.GetComponent<Rigidbody2D>().isKinematic = false;
-                Destroy(lrObj, 0.1f);
-                Vector3 direction = endpos - startpos;
-                this.transform.GetComponent<Rigidbody2D>().velocity = new Vector3(direction.x, direction.y, direction.z) * 2.5f;
-                draw = false;
-            }
+            Invoke("Action", 0.5f);
+        }
+    }
+
+    private void Action()
+    {
+        Vector3 startpos = this.transform.position;
+        Vector3 endpos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (Input.GetMouseButtonDown(0))
+        {
+            InitializeLine();
+            draw = true;
+        }
+        if (draw)
+        {
+            lr.SetVertexCount(2);
+            lr.SetPosition(0, startpos);
+            lr.SetPosition(1, endpos);
+        }
+        if (Input.GetMouseButtonUp(0) && draw)
+        {
+            this.transform.GetComponent<Rigidbody2D>().isKinematic = false;
+            Destroy(lrObj, 0.1f);
+            Vector3 direction = endpos - startpos;
+            this.transform.GetComponent<Rigidbody2D>().velocity = new Vector3(direction.x, direction.y, direction.z) * 2.5f;
+            draw = false;
         }
     }
 

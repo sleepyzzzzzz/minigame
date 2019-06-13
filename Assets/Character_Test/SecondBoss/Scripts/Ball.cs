@@ -20,10 +20,10 @@ namespace Level2Tool
         private void Awake()
         {
             hit_ground_num = 0;
-            Level2Manager.Instance().HitPortal += new Action(OnHitPortal);
         }
         private void OnCollisionEnter2D(Collision2D collision)
         {
+            Debug.Log(Level2Manager.ChargeNum);
             switch(collision.gameObject.tag)
             {
                 //Todo:这里略啰嗦，因为“碰撞两种传送门”应该是同一件事，但现在为红蓝门定义了两个不同的tag只好写成两个case，以后考虑优化 2019.6.1
@@ -37,7 +37,7 @@ namespace Level2Tool
                     else if (this.ballType == BallType.BlueBall)
                     {
                         Destroy(gameObject);
-                        OnHitPortal();
+                        Charging();
                     }
                     break;
                 case "RedPortal":
@@ -49,7 +49,7 @@ namespace Level2Tool
                     else if (this.ballType == BallType.BlueBall)
                     {
                         Destroy(gameObject);
-                        OnHitPortal();
+                        Charging();
                     }
                     break;
                 case "Goal":
@@ -95,7 +95,7 @@ namespace Level2Tool
         /// <summary>足球击中传送门后场景的响应
         /// 
         /// </summary>
-        private void OnHitPortal()
+        private void Charging()
         {
             Vector3 size = GameObject.FindGameObjectWithTag("TechBall").transform.localScale;
             Level2Manager.ChargeNum++;

@@ -7,26 +7,16 @@ public class ACORNS : MonoBehaviour
     public float Speed;
     public bool falling = false;
     public bool destroy = false;
-    private float self_destroyTimer = 0f;
 
     void Update()
     {
+        Debug.Log("dsads");
         transform.Translate(0, -Speed * Time.deltaTime, 0);
-        if (falling)
-        {
-            self_destroyTimer += Time.deltaTime;
-            Destroy(gameObject, 5f);
-            if (self_destroyTimer >= 5f)
-            {
-                destroy = true;
-                falling = false;
-            }
-        }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        switch (collision.collider.tag)
+        switch (collision.tag)
         {
             case "Player":
                 Destroy(gameObject);
@@ -34,7 +24,7 @@ public class ACORNS : MonoBehaviour
                 falling = false;
                 break;
             case "ground":
-                Destroy(gameObject);
+                Destroy(gameObject, 0.1f);
                 destroy = true;
                 falling = false;
                 break;

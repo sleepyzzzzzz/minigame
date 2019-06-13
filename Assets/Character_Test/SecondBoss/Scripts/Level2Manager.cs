@@ -71,6 +71,7 @@ namespace LevelManage
 
         private void Awake()
         {
+            if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Level2-boss")
             InstalizeBall(BallType.TechBall, new Vector3(4.88f, 13.85f, -1f));
         }
 
@@ -136,10 +137,11 @@ namespace LevelManage
         /// </summary>
         /// <param name="type"></param>
         /// <param name="transform"></param>
-        public void InstalizeBall(BallType type, Vector3 transform)
+        public GameObject InstalizeBall(BallType type, Vector3 transform)
         {
             GameObject Ball = Instantiate(Resources.Load(toolpath + type.ToString()), transform, Quaternion.identity) as GameObject;
             Ball.GetComponent<Ball>().ballType = type;
+            return Ball;
         }
 
         private void Level2LoseAsync()

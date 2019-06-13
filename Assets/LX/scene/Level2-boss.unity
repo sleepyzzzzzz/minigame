@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1996,6 +1996,7 @@ GameObject:
   - component: {fileID: 1407179360}
   - component: {fileID: 1407179365}
   - component: {fileID: 1407179363}
+  - component: {fileID: 1407179362}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -2012,17 +2013,17 @@ EdgeCollider2D:
   m_GameObject: {fileID: 1407179359}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 2802bcc5d7d95405d829285c00c5bfbf, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0.08
   m_Points:
-  - {x: 40.912605, y: 3.0140026}
-  - {x: 40.89273, y: 13.23555}
-  - {x: -10.128311, y: 13.228476}
-  - {x: -10.1186905, y: 3.00646}
+  - {x: -10.13533, y: 3.0754}
+  - {x: -10.167131, y: 13.230354}
+  - {x: 40.939945, y: 13.261486}
+  - {x: 40.899914, y: 3.1058848}
 --- !u!4 &1407179361
 Transform:
   m_ObjectHideFlags: 0
@@ -2040,6 +2041,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1407179362
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407179359}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 2802bcc5d7d95405d829285c00c5bfbf, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 12.318235, y: 9.355984}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.642414, y: 0.12012863}
+  m_EdgeRadius: 0
 --- !u!114 &1407179363
 MonoBehaviour:
   m_ObjectHideFlags: 0
