@@ -59,6 +59,7 @@ namespace Level2Tool
                             Level2Manager.Instance().ProcessMessage(ActionType.ShootSuccess);
                             Level2Manager.ChargeNum = 0;
                             Level2Manager.ShootSuccessNum++;
+                            Level2Manager.Instance().GoalIn();
                         }
                         Destroy(gameObject);
                         Level2Manager.Instance().InstalizeBall(BallType.TechBall, new Vector3(4.88f, 13.85f, -1f));
@@ -68,7 +69,10 @@ namespace Level2Tool
                 case "Player":
                     if(this.ballType != BallType.TechBall)
                     {
-                        Level2Manager.Instance().ProcessMessage(ActionType.HitPlayer);
+                        if (this.tag == "BlackBall" || this.tag == "BlueBall")
+                        {
+                            Level2Manager.Instance().PlayerGetHurt();
+                        }
                     }
                     break;
                 case "ground":

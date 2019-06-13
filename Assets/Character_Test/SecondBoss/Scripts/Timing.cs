@@ -16,7 +16,7 @@ namespace Clock
         // Start is called before the first frame update
         void Start()
         {
-            TimeText.text = string.Format("剩余时间: {0:D1}:{1:D2}", (int)level_time / 60, (int)level_time % 60);
+            TimeText.text = string.Format("剩余时间:\n{0:D1}:{1:D2}", (int)level_time / 60, (int)level_time % 60);
             StartCoroutine("Counting");
         }
 
@@ -31,7 +31,7 @@ namespace Clock
             {
                 yield return new WaitForSeconds(1);
                 level_time--;
-                TimeText.text = string.Format("剩余时间: {0:D1}:{1:D2}", (int)level_time / 60, (int)level_time % 60);
+                TimeText.text = string.Format("剩余时间:\n{0:D1}:{1:D2}", (int)level_time / 60, (int)level_time % 60);
             }
             Debug.Log("over");
             over = true;
