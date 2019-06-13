@@ -15,9 +15,10 @@ namespace BASKETBALL_Manager
             switch (collision.collider.tag)
             {
                 case "Player":
-                    PlayerController.Level2_Hurt(true);
                     Destroy(gameObject);
                     Level2backmanager.Instance.PlayerGetHurt();
+                    PlayerController.acorns_hit_count++;
+                    PlayerController.hurt = true;
                     break;
                 case "ground":
                     collision_num++;

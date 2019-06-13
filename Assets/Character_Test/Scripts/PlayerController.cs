@@ -34,7 +34,7 @@ namespace Controller
         public static int acorns_hit_count = 0;
 
         private bool walk;
-        private bool hurt;
+        public static bool hurt;
         private Vector3 pre_pos;
 
         public static Player_State State = Player_State.Alive;
@@ -51,6 +51,8 @@ namespace Controller
                 Level2Manager.Instance().ShootSuccess += BackToBossGame;
                 Level2Manager.Instance().ShootFailed += BackToBossGame;
             }
+            walk = false;
+            hurt = false;
         }
 
         // Update is called once per frame
@@ -101,6 +103,10 @@ namespace Controller
                 player_animator.SetFloat("verti", 1.5f);
             }
             Move_Anim();
+            if (hurt)
+            {
+                Level_Hurt();
+            }
         }
 
         void Flip()
@@ -163,26 +169,19 @@ namespace Controller
                     hurt = true;
                     break;
             }
-            Hurt_Anim();
+            if (hurt)
+            {
+                StartCoroutine(Hurt_Anim());
+            }
             Dead_State(collision.collider.tag);
         }
 
-        private void OnCollisionExit2D(Collision2D collision)
+        private IEnumerator Hurt_Anim()
         {
-            Hurt_Anim();
-        }
-
-        private void Hurt_Anim()
-        {
-            if (hurt)
-            {
-                player_animator.SetBool("hurt", true);
-                hurt = false;
-            }
-            else
-            {
-                player_animator.SetBool("hurt", false);
-            }
+            player_animator.SetBool("hurt", true);
+            yield return new WaitForSeconds(1);
+            hurt = false;
+            player_animator.SetBool("hurt", false);
         }
 
         private void JumpIntoTech()
@@ -233,9 +232,9 @@ namespace Controller
             }
         }
 
-        public static void Level2_Hurt(bool hu)
+        private void Level_Hurt()
         {
-            player_animator.SetBool("hurt", hu);
+            StartCoroutine(Hurt_Anim());
         }
     }
 }
