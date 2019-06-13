@@ -180,7 +180,7 @@ namespace LevelManage
         {
             hpImages[hurtCount].SetActive(false);
             hurtCount++;
-            if (hurtCount >= 2)
+            if (hurtCount >= 3)
             {
                 Invoke("Level2BossLoseAsync", 2f);
                 hurtCount = 0;

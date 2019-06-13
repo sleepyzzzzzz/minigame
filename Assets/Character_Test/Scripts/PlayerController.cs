@@ -209,14 +209,14 @@ namespace Controller
                     }
                     break;
                 case "BlueBall":
-                    if (ball_hit_count == 2)
+                    if (ball_hit_count == 3)
                     {
                         State = Player_State.Dead;
                         if (facing_left) { facing_right = true; facing_left = false; }
                     }
                     break;
                 case "BlackBall":
-                    if (ball_hit_count == 2)
+                    if (ball_hit_count == 3)
                     {
                         State = Player_State.Dead;
                         if (facing_left) { facing_right = true; facing_left = false; }
