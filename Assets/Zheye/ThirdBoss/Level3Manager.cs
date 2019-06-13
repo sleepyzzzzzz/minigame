@@ -49,6 +49,7 @@ public class Level3Manager : MonoBehaviour
     {
         if(ListenKey&&Input.anyKeyDown)
         {
+            Time.timeScale = 1;
             LoadEndCG();
         }
     }
@@ -81,7 +82,6 @@ public class Level3Manager : MonoBehaviour
 
     public void Level3Win()
     {
-        Time.timeScale = 0;
         StartCoroutine(ImageAlphaAnim(mask, 1, 1.5f));
         WinUI.SetActive(true);
         ListenKey = true;
