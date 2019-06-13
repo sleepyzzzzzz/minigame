@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2130,8 +2130,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 253}
-  m_SizeDelta: {x: -1152.2, y: -648}
+  m_AnchoredPosition: {x: -0.0038808, y: 67}
+  m_SizeDelta: {x: -498.8, y: -280.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1084020044
 GameObject:
@@ -2524,8 +2524,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -679.1}
-  m_SizeDelta: {x: 564.16, y: 140.7}
+  m_AnchoredPosition: {x: -0.000015259, y: -274}
+  m_SizeDelta: {x: 268.9, y: 67.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1223533115
 MonoBehaviour:
@@ -2549,7 +2549,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 39
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -3295,7 +3295,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0038757324, y: 0.0059814453}
+  m_AnchoredPosition: {x: -0.00390625, y: 0.0059814453}
   m_SizeDelta: {x: 3089.3, y: 1736.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1789973185
@@ -3448,8 +3448,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.6, y: -254.4}
-  m_SizeDelta: {x: 802, y: 449.5}
+  m_AnchoredPosition: {x: -0.000021617, y: -175}
+  m_SizeDelta: {x: 542.3, y: 192.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2014635295
 MonoBehaviour:
@@ -3473,7 +3473,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 39
+    m_FontSize: 21
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10

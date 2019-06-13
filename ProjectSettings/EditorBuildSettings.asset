@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/LX/scene/Level2-boss.unity
     guid: 5fc6a4392161462419e3e01d2757210b
   - enabled: 1
+    path: Assets/LX/scene/Level3.unity
+    guid: 7824d683d1ffbb149947c38ea03e3fc2
+  - enabled: 1
     path: Assets/LX/scene/Level3-boss.unity
     guid: 9af2cd84916e87e489e09038e54a4fcd
   - enabled: 1
